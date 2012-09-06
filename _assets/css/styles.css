@@ -43,9 +43,6 @@ h1 span {
   font-size: 20px;
   color: #717a7d;
 }
-h1.h1_Milka {
-  background: url("../images/stockLabels/Milka.png") right 50% no-repeat;
-}
 h2 {
   font-size: 22px;
   font-weight: 300;
@@ -89,6 +86,9 @@ a {
 }
 .mini {
   font-size: 10px;
+}
+iframe {
+  display: none;
 }
 /** TABLES **/
 table {
