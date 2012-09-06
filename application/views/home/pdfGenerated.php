@@ -6,7 +6,7 @@ if($error){
 <?
 }else{
 ?>
-  <p>Ihre Einladung wird automatisch herunter geladen. Viel Spaß!</p>
+  <p>Der Download Ihrer Einladung startet automatisch. Viel Spaß!</p>
   <iframe src="<?= base_url(); ?>home/pdfDownload"></iframe>
 <?
 }

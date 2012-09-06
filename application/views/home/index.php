@@ -5,18 +5,42 @@
 
 <?php
 if($pdfErrorMessages){
-  preprint($pdfErrorMessages);
+?>
+<h3 class="error">Beim Erzeugen der PDF Datei sind Fehler aufgetreten:</h3>
+<ul class="error">
+  <?php
+    foreach($pdfErrorMessages as $error){
+  ?>
+    <li><?= $error ?></li>
+  <?php
+    }
+  ?>
+</ul>
+<?
 }
 ?>
+
 
 <?php
 if($validationErrors){
-  preprint($validationErrors);
+?>
+<h3 class="error">Es sind Fehler aufgetreten:</h3>
+<ul class="error">
+  <?php
+    foreach($validationErrors as $error){
+  ?>
+    <li><?= $error ?></li>
+  <?php
+    }
+  ?>
+</ul>
+<?
 }
 ?>
 
 <?php
-echo form_open();
+$formAttributes = array('id' => 'dfpdf_form');
+echo form_open("", $formAttributes);
 ?>
 
 <?php
@@ -47,12 +71,12 @@ echo form_open();
   $data = array(
     'name'        => $fieldName,
     'id'          => $fieldName,
-    'value'       => $postVars["email"]."yyy"
+    'value'       => $postVars["email"]."a.geibert@zx-cemico.de"
   );
   ?>
 
   <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Ihre E-Mail Adresse</label>
+    <label for="<?php echo($fieldName); ?>">Ihre E-Mail Adresse:</label>
     <?php
       echo form_input($data);
     ?>

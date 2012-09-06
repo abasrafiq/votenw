@@ -24,12 +24,12 @@ Class Validationmodel extends CI_Model
 
     if($input->post("name") == ""){
       $this->isValid = FALSE;
-      $this->validationErrors = "Bitte geben Sie einen Namen an";
+      $this->validationErrors[] = "Bitte geben Sie einen Namen an";
     }
 
-    if($input->post("email") == ""){
+    if($input->post("email") == "" || !valid_email($input->post("email"))){
       $this->isValid = FALSE;
-      $this->validationErrors = "Bitte geben Sie eine korrekte E-Mail Adresse an";
+      $this->validationErrors[] = "Bitte geben Sie eine korrekte E-Mail Adresse an";
     }
 
   }

@@ -25,15 +25,15 @@ class Home extends APP_Controller {
     $this->data["postVars"] = $this->Validationmodel->getPostVars();
 
     if($this->input->post("btnSubmitForm") != ""){
-      
+      //Formular wurde abgesendet
       if($this->Validationmodel->isValid()){
         
-        //Validation OK
+        //Validierung OK
         $this->load->model("Pdfmodel");
         $this->Pdfmodel->genPdf($this->input);
 
         if($this->Pdfmodel->isError()){
-          //PDF Generieungsfehler
+          //PDF Generierungsfehler
           $this->data["error"] = TRUE;
           $this->data["pdfErrorMessages"] = $this->Pdfmodel->getErrorMessages();
         }
@@ -125,7 +125,7 @@ class Home extends APP_Controller {
 
     //Set the source PDF file
     $pagecount = $this->fpdi->setSourceFile($templateFileName);
-    
+
     //Import the first page of the file
     $tpl = $this->fpdi->importPage(1);
 

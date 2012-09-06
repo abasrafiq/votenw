@@ -64,7 +64,7 @@ $autoload['libraries'] = array("session", "Layout", "database", "unit_test", "fo
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array("url", "form", "html2pdf", "output", "xml");
+$autoload['helper'] = array("url", "form", "html2pdf", "output", "xml", "email");
 
 
 /*
