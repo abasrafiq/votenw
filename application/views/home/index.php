@@ -1,6 +1,6 @@
-<h1>Individualisierung</h1>
+<h2>Ihre Stammdaten</h2>
 <p>
-  Geben Sie Ihren Namen und Ihre E-Mail Adresse ein, um Ihren personalisierten Gutschein herunter laden zu können.
+  Bitte überprüfen Sie die von uns angegebenen Daten und geben Sie mögliche Änderungen bitte entsprechend ein.
 </p>
 
 <?php
@@ -20,8 +20,6 @@ if($pdfErrorMessages){
 }
 ?>
 
-
-
 <?php
 if($validationErrors){
 ?>
@@ -39,158 +37,183 @@ if($validationErrors){
 }
 ?>
 
+
 <?php
 $formAttributes = array('id' => 'dfpdf_form');
 echo form_open("", $formAttributes);
 ?>
 
-  <?php
-  //Feld
-  //############################
-  $fieldName = "nachname";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '100',
-  );
-  ?>
+<div class="container_50_50">
+  <div class="containerLeft">
 
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Nachname:</label>
-    <?php
-      echo form_input($data);
-    ?>
+
+      <?php
+      //Feld
+      //############################
+      $fieldName = "firma";
+      $data = array(
+        'name'        => $fieldName,
+        'id'          => $fieldName,
+        'value'       => $postVars[$fieldName],
+        'maxlength'   => '100',
+      );
+      ?>
+
+      <div class="formRow">
+        <label for="<?php echo($fieldName); ?>">Firmenname *</label>
+        <?php
+          echo form_input($data);
+        ?>
+      </div>
+
+
+
+      <?php
+      //Feld
+      //############################
+      $fieldName = "strasse";
+      $data = array(
+        'name'        => $fieldName,
+        'id'          => $fieldName,
+        'value'       => $postVars[$fieldName],
+        'maxlength'   => '100',
+      );
+      ?>
+
+      <div class="formRow">
+        <label for="<?php echo($fieldName); ?>">Straße *</label>
+        <?php
+          echo form_input($data);
+        ?>
+      </div>
+
+
+      <?php
+      //Feld
+      //############################
+      $fieldName = "telefon";
+      $data = array(
+        'name'        => $fieldName,
+        'id'          => $fieldName,
+        'value'       => $postVars[$fieldName],
+        'maxlength'   => '100',
+      );
+      ?>
+
+      <div class="formRow">
+        <label for="<?php echo($fieldName); ?>">Telefon *</label>
+        <?php
+          echo form_input($data);
+        ?>
+      </div>
+
+      <h2>Ihr Verkaufspreis in Euro.*</h2>
+
   </div>
 
 
 
 
-  <?php
-  //Feld
-  //############################
-  $fieldName = "vorname";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '100',
-  );
-  ?>
 
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Vorname:</label>
+  <div class="containerRight">
+
     <?php
-      echo form_input($data);
+    //Feld
+    //############################
+    $fieldName = "nachname";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $postVars[$fieldName],
+      'maxlength'   => '100',
+    );
     ?>
-  </div>
+
+    <div class="formRow">
+      <label for="<?php echo($fieldName); ?>">Ansprechpartner</label>
+      <?php
+        echo form_input($data);
+      ?>
+    </div>
 
 
-
-
-  <?php
-  //Feld
-  //############################
-  $fieldName = "firma";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '100',
-  );
-  ?>
-
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Firma:</label>
     <?php
-      echo form_input($data);
+    //Feld
+    //############################
+    $fieldName = "plz";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $postVars[$fieldName],
+      'maxlength'   => '5',
+    );
     ?>
-  </div>
+
+    <div class="formRow">
+      <label for="<?php echo($fieldName); ?>">PLZ / Ort *</label>
+      <?php
+        echo form_input($data);
+
+        //Feld
+        //############################
+        $fieldName = "ort";
+        $data = array(
+          'name'        => $fieldName,
+          'id'          => $fieldName,
+          'value'       => $postVars[$fieldName]
+        );
+        echo form_input($data);
+
+      ?>
+    </div>
 
 
-
-
-  <?php
-  //Feld
-  //############################
-  $fieldName = "strasse";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '100',
-  );
-  ?>
-
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Straße:</label>
     <?php
-      echo form_input($data);
+    //Feld
+    //############################
+    $fieldName = "email";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $postVars[$fieldName],
+      'maxlength'   => '100',
+    );
     ?>
-  </div>
+
+    <div class="formRow">
+      <label for="<?php echo($fieldName); ?>">E-Mail</label>
+      <?php
+        echo form_input($data);
+      ?>
+    </div>
 
 
 
-  <?php
-  //Feld
-  //############################
-  $fieldName = "plz";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '5',
-  );
-  ?>
-
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">PLZ:</label>
     <?php
-      echo form_input($data);
+    //Feld
+    //############################
+    $fieldName = "verkaufspreis";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $postVars[$fieldName],
+      'maxlength'   => '100',
+    );
     ?>
+
+    <div class="formRow">
+      <?php
+        echo form_input($data);
+      ?>
+    </div>
+
+
+
   </div>
+</div>
+<div class="clear"></div>
 
-
-
-  <?
-  //Feld
-  //############################
-  $fieldName = "ort";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName]
-  );
-  ?>
-
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Ort:</label>
-    <?php
-      echo form_input($data);
-    ?>
-  </div>
-
-
-
-  <?php
-  //Feld
-  //############################
-  $fieldName = "email";
-  $data = array(
-    'name'        => $fieldName,
-    'id'          => $fieldName,
-    'value'       => $postVars[$fieldName],
-    'maxlength'   => '100',
-  );
-  ?>
-
-  <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">E-Mail:</label>
-    <?php
-      echo form_input($data);
-    ?>
-  </div>
-
+<p class="lightGray">Die mit "*" gekennzeichneten Angaben, sind Pflichtfelder</p>
 
 
   <?php

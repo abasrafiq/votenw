@@ -74,15 +74,7 @@
     <?php } ?>
 
 
-    <div class="container">
-
-      <div id="logoContainer" class="clearfix">
-        <? if($userdata && $controllerNameShort != "home"){ ?>
-          <a id="neueBestellung" class="btn btn-norm" href="<?= base_url(); ?>home">Neue Bestellung</a>
-        <? }else{ ?>
-        <a id="neueBestellung">&nbsp;</a>
-        <? } ?>
-      </div>
+    <div id="wrapper">
 
       <div id="content">
       

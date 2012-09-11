@@ -26,6 +26,7 @@ Class Validationmodel extends CI_Model
       "ort" => $input->post("ort"),
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
+      "verkaufspreis" => $input->post("verkaufspreis"),
     );
 
     if($input->post("nachname") == ""){

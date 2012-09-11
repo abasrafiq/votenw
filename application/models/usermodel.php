@@ -54,6 +54,7 @@ Class Usermodel extends CI_Model{
       "ort" => $input->post("ort"),
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
+      "verkaufspreis" => $input->post("verkaufspreis"),
     );
     $this->db->where('id', $userID);
     $this->db->update('users', $data); 

@@ -7,16 +7,15 @@ class Home extends APP_Controller {
   
   private $postData = Array();
   private $pdfWasGenerated = FALSE;
-  private $SESSIONKEY_GENERATED_PDF_FILENAME = "generatedPDFFileName";
-  private $pdfTemplateFileName = "pdfTemplates/jQuery-17-Visual-Cheat-Sheet.pdf";
-  private $pdfOutputFileName = "Individualisiertes_PDF.pdf";
+  private $SESSIONKEY_GENERATED_DOWNLOAD_FILENAME  = "generatedPDFFileName";
+  private $downloadFileName = "Templates.zip";
 
   public function __construct() {
     parent::__construct();
   }
   
   public function index() {
-    
+
     $this->data["error"] == FALSE;
 
 
@@ -26,20 +25,12 @@ class Home extends APP_Controller {
 
     if($this->input->post("btnSubmitForm") != ""){
 
-      $this->data["postVars"] = $this->Validationmodel->getPostVars();
+      $this->data["postVars"] = $this->Validationmodel->getPostVars($this->input);
 
       //Formular wurde abgesendet
       if($this->Validationmodel->isValid()){
         
         //Validierung OK
-        $this->load->model("Pdfmodel");
-        $this->Pdfmodel->genPdf($this->input);
-
-        if($this->Pdfmodel->isError()){
-          //PDF Generierungsfehler
-          $this->data["error"] = TRUE;
-          $this->data["pdfErrorMessages"] = $this->Pdfmodel->getErrorMessages();
-        }
         
       }else{
         //Validation FEHLER
@@ -56,14 +47,17 @@ class Home extends APP_Controller {
         );
         $this->session->set_userdata($this->postData);
 
-        $this->pdfWasGenerated = TRUE;
-        $this->generatePDF();
+        $this->downloadWasGenerated = TRUE;
+        $this->generateDownload();
           
       }
 
     }else{
 
       if($this->input->post("btnSubmitAdressdaten") != ""){
+
+        $this->data["postVars"] = $this->Validationmodel->getPostVars($this->input);
+        
          //Adressdaten updaten falls valide
         if($this->Validationmodel->isValid()){
           
@@ -94,12 +88,12 @@ class Home extends APP_Controller {
       }
     }
 
-    if(!$this->pdfWasGenerated){
+    if(!$this->downloadWasGenerated){
       //PDF wurde nicht erzeugt, Startseite/Formular anzeigen
       $this->layout->show('/home/index', $this->data);  
     }else{
       //Validierung Ok, PDF wurde erzeugt, Redirect zur direct Download Seite
-      redirect("home/pdfGenerated");
+      redirect("home/downloadGenerated");
     }
     
   }
@@ -109,9 +103,9 @@ class Home extends APP_Controller {
   /** 
   /* Auf diese Seite wird weiter geleitet, wenn die Validierung Ok ist und der Download erzeugt wurde
   */
-  public function pdfGenerated(){
+  public function downloadGenerated(){
     //PDF wurde erzeugt, View mit verstecktem iFrame zum automatischen Download und die Meldungen anzeigen
-    if(!$this->pdfFileExists()){
+    if(!$this->downloadFileExists()){
       $this->data["error"] = TRUE;
     }
     $this->layout->show('/home/pdfGenerated', $this->data);
@@ -124,10 +118,10 @@ class Home extends APP_Controller {
   */
   public function pdfDownload(){
     
-    $tmpFileName = $this->session->userdata($this->SESSIONKEY_GENERATED_PDF_FILENAME);
+    $tmpFileName = $this->session->userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME );
 
-    if($this->pdfFileExists()){
-      header('Content-Disposition: attachment; filename="'.$this->pdfOutputFileName.'"');
+    if($this->downloadFileExists()){
+      header('Content-Disposition: attachment; filename="'.$this->downloadFileName.'"');
       readfile($tmpFileName);
       unlink($tmpFileName);
     }
@@ -139,8 +133,8 @@ class Home extends APP_Controller {
   /**
   /* Helper Funktion - Existiert die PDF Datei aus der Session?
   */
-  private function pdfFileExists(){
-    $tmpFileName = $this->session->userdata($this->SESSIONKEY_GENERATED_PDF_FILENAME);
+  private function downloadFileExists(){
+    $tmpFileName = $this->session->userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME );
     return file_exists($tmpFileName);
   }
 
@@ -149,11 +143,15 @@ class Home extends APP_Controller {
   /** 
   /* Erzeugt das PDF File und legt es im Filesystem + den Namen in der Session ab
   */
-  private function generatePDF(){
+  private function generateDownload(){
 
-    $templateFileName = $this->pdfTemplateFileName;
+    $templateFileName = "uploads/_pdfTemplates/jQuery-17-Visual-Cheat-Sheet.pdf";
+
     $this->load->library('fpdf');
     $this->load->library('fpdi');
+    $this->load->model("Pdfmodel");
+
+    //foreach data pdf erzeugen
 
     $this->fpdi->AddPage();
 
@@ -172,7 +170,7 @@ class Home extends APP_Controller {
     //$this->fpdi->Rotate(90);
     //$this->fpdi->Image('think.jpg',120,240,20,20);
     //$this->fpdi->Image('think.jpg',120,260,20,20);
-    $this->fpdi->Write(0, $this->session->userdata("pdfData_name")." ".$this->session->userdata("pdfData_email"));
+    $this->fpdi->Write(0, $this->session->userdata("pdfData_nachname")." ".$this->session->userdata("pdfData_email"));
 
     /*
     * Output Options
@@ -181,10 +179,20 @@ class Home extends APP_Controller {
     * F: save to a local file with the name given by name (may include a path).
     * S: return the document as a string. name is ignored.
     */
-    $tmpFileName = "tmp/df_".md5(time()).".pdf";
-    $this->fpdi->Output($tmpFileName, "F");
+    $tmpPdfFileName = "tmp/df_".md5(time()).".pdf";
+    $this->fpdi->Output($tmpPdfFileName, "F");
 
-    $this->session->set_userdata($this->SESSIONKEY_GENERATED_PDF_FILENAME, $tmpFileName);
+    $tmpZipFileName = "tmp/".md5(time()).".zip";
+
+    //ZIP ALL PDFs
+    $zip = new ZipArchive;
+    $resource = $zip->open( $tmpZipFileName, ZipArchive::CREATE );
+    if ($resource === TRUE){
+      $zip->addFile($tmpPdfFileName);
+      $zip->close();
+    }
+
+    $this->session->set_userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME , $tmpZipFileName);
 
   }
 

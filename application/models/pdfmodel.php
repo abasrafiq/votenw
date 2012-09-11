@@ -5,34 +5,34 @@ if (!defined('BASEPATH'))
 Class Pdfmodel extends CI_Model
 {
 
-  private $error = FALSE; //If an error was raised during pdf generation etc.
-  private $errorMessages = Array();
-  private $generatedPDFFileName = "pdfFileName";
+  private $data;
 
   public function __construct() {
     parent::__construct();
+
+    //Alle vorhanden Templates mit Felddefintionen
+    $this->data = Array(
+
+      "Template1" => Array(
+        "filename" => "xy.pdf",
+        "name_x" => 20,
+        "name_y" => 50
+      ),
+
+      "Template2" => Array(
+        "filename" => "zzz.pdf",
+        "name_x" => 20,
+        "name_y" => 50
+      ),
+
+    );
+
   }
 
-
-  /*
-  * Generate PDF and deliver if input validation is Ok
-  */
-  public function genPdf($input){
-    //$this->errorMessages[] = "Fehler: Datei nicht gefunden";
-    //$this->error = TRUE;
+  public function getData(){
+    return $this->data;
   }
 
-  public function isError(){
-    return $this->error;
-  }
-
-  public function getErrorMessages(){
-    return $this->errorMessages;
-  }
-
-  public function getGeneratedPDFFileName(){
-    return $this->generatedPDFFileName;
-  }
 
 }
 
