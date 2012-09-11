@@ -257,6 +257,9 @@ select {
   margin: 0 auto;
   padding-top: 60px;
 }
+#containerLogin label {
+  white-space: nowrap;
+}
 #containerLogin input[type=text],
 #containerLogin input[type=password] {
   font-size: 16px;

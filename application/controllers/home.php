@@ -22,9 +22,12 @@ class Home extends APP_Controller {
 
     $this->load->model("Validationmodel");
     $this->Validationmodel->validateGenPdfForm($this->input);
-    $this->data["postVars"] = $this->Validationmodel->getPostVars();
+    
 
     if($this->input->post("btnSubmitForm") != ""){
+
+      $this->data["postVars"] = $this->Validationmodel->getPostVars();
+
       //Formular wurde abgesendet
       if($this->Validationmodel->isValid()){
         
@@ -58,6 +61,37 @@ class Home extends APP_Controller {
           
       }
 
+    }else{
+
+      if($this->input->post("btnSubmitAdressdaten") != ""){
+         //Adressdaten updaten falls valide
+        if($this->Validationmodel->isValid()){
+          
+          //Validierung OK
+          $this->load->model("Usermodel");
+          $this->Usermodel->updateData($this->input, $this->userdata["id"]);
+
+          $this->session->set_flashdata("flashMessages", "Ihre Daten wurden aktualisiert");
+
+          redirect("home");
+
+        }else{
+          //Validation FEHLER
+          $this->data["error"] = TRUE;
+          $this->data["validationErrors"] = $this->Validationmodel->getValidationErrors();
+        }
+       
+
+      }else{
+        //Formular wurde noch nicht abgesendet, Felder mit Benutzerdaten füllen
+        $this->load->model("Usermodel");
+        $this->data["postVars"] = $this->Usermodel->getUserdata($this->userdata["id"]);
+        if(!$this->data["postVars"]){
+          //Fehler beim auffinden der Userdaten
+          //$this->session->set_flashdata('flashMessages', 'Fehler beim Auslesen der Benutzerdaten');
+          //redirect("home/index");
+        }
+      }
     }
 
     if(!$this->pdfWasGenerated){

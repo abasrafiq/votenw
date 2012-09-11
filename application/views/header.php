@@ -60,7 +60,7 @@
                 ?>
               </ul>
               <ul class="nav pull-right">
-                <li><a href="#">Eingeloggt als <?= $userdata["name"]; ?></a></li>
+                <li><a href="#">Eingeloggt als <?= $userdata["vorname"]." ".$userdata["nachname"]; ?></a></li>
                 <li class="logout"><a href="<?= base_url(); ?>login/logout">Logout</a></li>
               </ul>
             <?php } ?>

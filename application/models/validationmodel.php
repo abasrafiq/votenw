@@ -18,13 +18,19 @@ Class Validationmodel extends CI_Model
   **/
   public function validateGenPdfForm($input){
     $this->postVars = Array(
-      "name" => $input->post("name"),
+      "nachname" => $input->post("nachname"),
+      "vorname" => $input->post("vorname"),
+      "firma" => $input->post("firma"),
+      "strasse" => $input->post("strasse"),
+      "plz" => $input->post("plz"),
+      "ort" => $input->post("ort"),
       "email" => $input->post("email"),
+      "telefon" => $input->post("telefon"),
     );
 
-    if($input->post("name") == ""){
+    if($input->post("nachname") == ""){
       $this->isValid = FALSE;
-      $this->validationErrors[] = "Bitte geben Sie einen Namen an";
+      $this->validationErrors[] = "Bitte geben Sie Ihren Nachnamen an";
     }
 
     if($input->post("email") == "" || !valid_email($input->post("email"))){

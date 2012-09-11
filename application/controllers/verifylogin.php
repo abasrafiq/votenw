@@ -12,9 +12,8 @@ class VerifyLogin extends APP_Controller {
  {
    //This method will have the credentials validation
    $this->load->library('form_validation');
-
-   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
+   $this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean|callback_check_database');
+   //$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -29,13 +28,13 @@ class VerifyLogin extends APP_Controller {
 
  }
 
- function check_database($password)
+ function check_database()
  {
    //Field validation succeeded.&nbsp; Validate against database
-   $username = $this->input->post('username');
+   $code = $this->input->post('code');
 
    //query the database
-   $result = $this->Usermodel->login($username, $password);
+   $result = $this->Usermodel->login($code);
 
    if($result)
    {
@@ -46,7 +45,9 @@ class VerifyLogin extends APP_Controller {
          'id' => $row->id,
          'username' => $row->username,
          'email' => $row->email,
-         'name' => $row->name
+         'vorname' => $row->vorname,
+         'nachname' => $row->nachname,
+         'code' => $row->code
        );
        $this->session->set_userdata('logged_in', $sess_array);
        
@@ -55,7 +56,7 @@ class VerifyLogin extends APP_Controller {
    }
    else
    {
-     $this->form_validation->set_message('check_database', 'Invalid username or password');
+     $this->form_validation->set_message('check_database', 'Dieser Code wurde nicht gefunden');
      return false;
    }
  }

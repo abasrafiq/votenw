@@ -21,6 +21,7 @@ if($pdfErrorMessages){
 ?>
 
 
+
 <?php
 if($validationErrors){
 ?>
@@ -43,20 +44,20 @@ $formAttributes = array('id' => 'dfpdf_form');
 echo form_open("", $formAttributes);
 ?>
 
-<?php
-  //Feld NAME
+  <?php
+  //Feld
   //############################
-  $fieldName = "name";
+  $fieldName = "nachname";
   $data = array(
     'name'        => $fieldName,
     'id'          => $fieldName,
-    'value'       => $postVars["name"]."xxx",
+    'value'       => $postVars[$fieldName],
     'maxlength'   => '100',
   );
   ?>
 
   <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Ihr Name:</label>
+    <label for="<?php echo($fieldName); ?>">Nachname:</label>
     <?php
       echo form_input($data);
     ?>
@@ -64,19 +65,65 @@ echo form_open("", $formAttributes);
 
 
 
-  <?
-  //Feld E-MAIL
+
+  <?php
+  //Feld
   //############################
-  $fieldName = "email";
+  $fieldName = "vorname";
   $data = array(
     'name'        => $fieldName,
     'id'          => $fieldName,
-    'value'       => $postVars["email"]."a.geibert@zx-cemico.de"
+    'value'       => $postVars[$fieldName],
+    'maxlength'   => '100',
   );
   ?>
 
   <div class="formRow">
-    <label for="<?php echo($fieldName); ?>">Ihre E-Mail Adresse:</label>
+    <label for="<?php echo($fieldName); ?>">Vorname:</label>
+    <?php
+      echo form_input($data);
+    ?>
+  </div>
+
+
+
+
+  <?php
+  //Feld
+  //############################
+  $fieldName = "firma";
+  $data = array(
+    'name'        => $fieldName,
+    'id'          => $fieldName,
+    'value'       => $postVars[$fieldName],
+    'maxlength'   => '100',
+  );
+  ?>
+
+  <div class="formRow">
+    <label for="<?php echo($fieldName); ?>">Firma:</label>
+    <?php
+      echo form_input($data);
+    ?>
+  </div>
+
+
+
+
+  <?php
+  //Feld
+  //############################
+  $fieldName = "strasse";
+  $data = array(
+    'name'        => $fieldName,
+    'id'          => $fieldName,
+    'value'       => $postVars[$fieldName],
+    'maxlength'   => '100',
+  );
+  ?>
+
+  <div class="formRow">
+    <label for="<?php echo($fieldName); ?>">Straße:</label>
     <?php
       echo form_input($data);
     ?>
@@ -85,7 +132,81 @@ echo form_open("", $formAttributes);
 
 
   <?php
-  //SUBMIT BUTTON
+  //Feld
+  //############################
+  $fieldName = "plz";
+  $data = array(
+    'name'        => $fieldName,
+    'id'          => $fieldName,
+    'value'       => $postVars[$fieldName],
+    'maxlength'   => '5',
+  );
+  ?>
+
+  <div class="formRow">
+    <label for="<?php echo($fieldName); ?>">PLZ:</label>
+    <?php
+      echo form_input($data);
+    ?>
+  </div>
+
+
+
+  <?
+  //Feld
+  //############################
+  $fieldName = "ort";
+  $data = array(
+    'name'        => $fieldName,
+    'id'          => $fieldName,
+    'value'       => $postVars[$fieldName]
+  );
+  ?>
+
+  <div class="formRow">
+    <label for="<?php echo($fieldName); ?>">Ort:</label>
+    <?php
+      echo form_input($data);
+    ?>
+  </div>
+
+
+
+  <?php
+  //Feld
+  //############################
+  $fieldName = "email";
+  $data = array(
+    'name'        => $fieldName,
+    'id'          => $fieldName,
+    'value'       => $postVars[$fieldName],
+    'maxlength'   => '100',
+  );
+  ?>
+
+  <div class="formRow">
+    <label for="<?php echo($fieldName); ?>">E-Mail:</label>
+    <?php
+      echo form_input($data);
+    ?>
+  </div>
+
+
+
+  <?php
+  //SUBMIT BUTTON ADRESSDATEN
+  //############################
+  ?>
+  <div class="formRow">
+    <?php
+      echo form_submit('btnSubmitAdressdaten', 'Adressdaten aktualisieren', 'class="btn-norm"');
+    ?>
+  </div>
+
+
+
+  <?php
+  //SUBMIT BUTTON PDF GENERIEREN
   //############################
   ?>
   <div class="formRow">
