@@ -115,6 +115,8 @@ class Home extends APP_Controller {
 
     $countTemplates = 0;
 
+    require_once("application/libraries/fpdf/fpdf.php");
+    require_once("application/libraries/fpdi/fpdi.php");
     $this->load->model("Pdfmodel");
     $arTtmpPdfFileNames = Array(); //Alle erzeugten temporären PDF Dateien die wieder gelöscht werden
 
@@ -130,12 +132,15 @@ class Home extends APP_Controller {
       die("Konnte zip-Download nicht erzeugen");
     }
 
+
     foreach($templates as $template){
-      $this->load->library('fpdf');
-      $this->load->library('fpdi');
+
+      $fpdf = new FPDF;
+      $fpdi = new FPDI;
+
       //globale PDF Einstellungen
-      $this->fpdi->SetFont('Arial','',8);
-      $this->fpdi->SetTextColor(0,0,0);
+      $fpdi->SetFont('Arial','',8);
+      $fpdi->SetTextColor(0,0,0);
 
       $countTemplates ++;
 
@@ -145,23 +150,30 @@ class Home extends APP_Controller {
         die("Konnte Templatedatei nicht finden");
       }
 
-      //Set the source PDF file
-      $pagecount = $this->fpdi->setSourceFile($templateFileName);
 
-      $this->fpdi->AddPage();
+
+      //Set the source PDF file
+      $pagecount = $fpdi->setSourceFile($templateFileName);
+
+      $fpdi->AddPage();
 
       //Import the first page of the file
-      $tpl = $this->fpdi->importPage(1);
+      $tpl = $fpdi->importPage(1);
 
       //Use this page as template
-      $this->fpdi->useTemplate($tpl, 0, 0);
+      $fpdi->useTemplate($tpl, 0, 0);
 
       
-      $this->fpdi->SetXY(20, 20);
-      //$this->fpdi->Rotate(90);
-      //$this->fpdi->Image('think.jpg',120,240,20,20);
-      //$this->fpdi->Image('think.jpg',120,260,20,20);
-      $this->fpdi->Write(0, $this->session->userdata("telefon")." ".$this->session->userdata("email"));
+      //START Einträge schreiben
+      //Firma
+      $fieldName = "firma";
+      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
+      $fpdi->Write(0, $this->session->userdata($fieldName));
+
+      //Telefon
+      $fieldName = "telefon";
+      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
+      $fpdi->Write(0, $this->session->userdata($fieldName));
 
 
 
@@ -175,8 +187,8 @@ class Home extends APP_Controller {
       $tmpPdfFileName = "tmp/df_".md5(time())."_".$countTemplates.".pdf";
       //erzeugte temporäre Datei Ablegen, wird später gelöscht
       $arTtmpPdfFileNames[] = $tmpPdfFileName;
-      $this->fpdi->Output($tmpPdfFileName, "F");
-      $this->fpdi->Close();
+      $fpdi->Output($tmpPdfFileName, "F");
+      $fpdi->Close();
 
       //PDF zu zip hinzufügen
       $zip->addFile($tmpPdfFileName);

@@ -15,14 +15,18 @@ Class Pdfmodel extends CI_Model
 
       "Template2" => Array(
         "filename" => "regEx_CS.pdf",
-        "name_x" => 200,
-        "name_y" => 10
+        "firma_x" => 10,
+        "firma_y" => 10,
+        "telefon_x" => 10,
+        "telefon_y" => 30
       ),
 
       "Template1" => Array(
         "filename" => "jquery.pdf",
-        "name_x" => 20,
-        "name_y" => 50
+        "firma_x" => 20,
+        "firma_y" => 10,
+        "telefon_x" => 20,
+        "telefon_y" => 50
       ),
 
     );
