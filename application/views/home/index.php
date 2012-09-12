@@ -1,12 +1,12 @@
 <h2>Ihre Stammdaten</h2>
 <p>
-  Bitte überprüfen Sie die von uns angegebenen Daten und geben Sie mögliche Änderungen bitte entsprechend ein.
+  Bitte überprüfen Sie die von uns angegebenen Daten und geben Sie mögliche Änderungen bitte entsprechend ein. <span class="lightGray" id="pflichtangaben">(* = Pflichtfeld)</span>
 </p>
 
 <?php
 if($pdfErrorMessages){
 ?>
-<h3 class="error">Beim Erzeugen der PDF Datei sind Fehler aufgetreten:</h3>
+<h3 class="error">Beim Erzeugen der PDF Dateien sind Fehler aufgetreten:</h3>
 <ul class="error">
   <?php
     foreach($pdfErrorMessages as $error){
@@ -54,7 +54,7 @@ echo form_open("", $formAttributes);
       $data = array(
         'name'        => $fieldName,
         'id'          => $fieldName,
-        'value'       => $postVars[$fieldName],
+        'value'       => $userData[$fieldName],
         'maxlength'   => '100',
       );
       ?>
@@ -75,7 +75,7 @@ echo form_open("", $formAttributes);
       $data = array(
         'name'        => $fieldName,
         'id'          => $fieldName,
-        'value'       => $postVars[$fieldName],
+        'value'       => $userData[$fieldName],
         'maxlength'   => '100',
       );
       ?>
@@ -95,7 +95,7 @@ echo form_open("", $formAttributes);
       $data = array(
         'name'        => $fieldName,
         'id'          => $fieldName,
-        'value'       => $postVars[$fieldName],
+        'value'       => $userData[$fieldName],
         'maxlength'   => '100',
       );
       ?>
@@ -107,7 +107,7 @@ echo form_open("", $formAttributes);
         ?>
       </div>
 
-      <h2>Ihr Verkaufspreis in Euro.*</h2>
+      <h2 id="h2Verkaufspreis">Ihr Verkaufspreis in Euro.*</h2>
 
   </div>
 
@@ -120,17 +120,17 @@ echo form_open("", $formAttributes);
     <?php
     //Feld
     //############################
-    $fieldName = "nachname";
+    $fieldName = "ansprechpartner";
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
-      'value'       => $postVars[$fieldName],
+      'value'       => $userData[$fieldName],
       'maxlength'   => '100',
     );
     ?>
 
     <div class="formRow">
-      <label for="<?php echo($fieldName); ?>">Ansprechpartner</label>
+      <label for="<?php echo($fieldName); ?>">Ansprechpartner *</label>
       <?php
         echo form_input($data);
       ?>
@@ -144,7 +144,7 @@ echo form_open("", $formAttributes);
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
-      'value'       => $postVars[$fieldName],
+      'value'       => $userData[$fieldName],
       'maxlength'   => '5',
     );
     ?>
@@ -160,7 +160,7 @@ echo form_open("", $formAttributes);
         $data = array(
           'name'        => $fieldName,
           'id'          => $fieldName,
-          'value'       => $postVars[$fieldName]
+          'value'       => $userData[$fieldName]
         );
         echo form_input($data);
 
@@ -175,7 +175,7 @@ echo form_open("", $formAttributes);
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
-      'value'       => $postVars[$fieldName],
+      'value'       => $userData[$fieldName],
       'maxlength'   => '100',
     );
     ?>
@@ -196,7 +196,7 @@ echo form_open("", $formAttributes);
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
-      'value'       => $postVars[$fieldName],
+      'value'       => $userData[$fieldName],
       'maxlength'   => '100',
     );
     ?>
@@ -213,30 +213,35 @@ echo form_open("", $formAttributes);
 </div>
 <div class="clear"></div>
 
-<p class="lightGray">Die mit "*" gekennzeichneten Angaben, sind Pflichtfelder</p>
+<div class="container_50_50">
+  <div class="containerLeft">
 
-
-  <?php
-  //SUBMIT BUTTON ADRESSDATEN
-  //############################
-  ?>
-  <div class="formRow">
     <?php
-      echo form_submit('btnSubmitAdressdaten', 'Adressdaten aktualisieren', 'class="btn-norm"');
+    //SUBMIT BUTTON ADRESSDATEN
+    //############################
     ?>
+    <div class="formRow">
+    <?php
+      echo form_submit('btnSubmitAdressdaten', 'Daten speichern', 'class="btn-norm"');
+    ?>
+    </div>
+
   </div>
 
+  <div class="containerRight">
 
-
-  <?php
-  //SUBMIT BUTTON PDF GENERIEREN
-  //############################
-  ?>
-  <div class="formRow">
     <?php
-      echo form_submit('btnSubmitForm', 'Gutschein erzeugen', 'class="btn-norm"');
+    //SUBMIT BUTTON PDF GENERIEREN
+    //############################
     ?>
+    <div class="formRow">
+      <?php
+        echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm"');
+      ?>
+    </div>
+
   </div>
+</div>
 
 <?php
 echo form_close();

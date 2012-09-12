@@ -12,25 +12,39 @@ class Home extends APP_Controller {
 
   public function __construct() {
     parent::__construct();
+
+    $this->load->model("Usermodel");
+
   }
   
   public function index() {
 
     $this->data["error"] == FALSE;
 
-
     $this->load->model("Validationmodel");
     $this->Validationmodel->validateGenPdfForm($this->input);
     
 
-    if($this->input->post("btnSubmitForm") != ""){
-
-      $this->data["postVars"] = $this->Validationmodel->getPostVars($this->input);
-
+    if($this->input->post("btnSubmitForm") != "" || $this->input->post("btnSubmitAdressdaten") != ""){
+      //Formular wurde gesendet Daten speichern egal ob Adfressdaten aktualisieren oder Gutschein erzeugen
+      $this->postData = $this->Validationmodel->getPostVars($this->input);
+      $this->data["userData"] = $this->postData;
       //Formular wurde abgesendet
       if($this->Validationmodel->isValid()){
         
-        //Validierung OK
+        //Validierung OK, Userdaten speichern
+        
+        $this->Usermodel->updateData($this->input, $this->userdata["id"]);
+
+        $this->session->set_userdata($this->postData);
+
+        if($this->input->post("btnSubmitForm") != ""){
+          $this->downloadWasGenerated = TRUE;
+          $this->generateDownload();
+        }elseif($this->input->post("btnSubmitAdressdaten") != ""){
+          $this->session->set_flashdata("flashMessages", "Ihre Daten wurden aktualisiert");
+          redirect("home");
+        }
         
       }else{
         //Validation FEHLER
@@ -38,54 +52,9 @@ class Home extends APP_Controller {
         $this->data["validationErrors"] = $this->Validationmodel->getValidationErrors();
       }
 
-      if($this->data["error"] == FALSE){
-
-        //Formular übermittelt, keine Fehler - Daten Session ablegen
-        $this->postData = Array(
-          "pdfData_name" => $this->data["postVars"]["name"], //From Validation postVars
-          "pdfData_email" => $this->data["postVars"]["email"], //From Validation postVars
-        );
-        $this->session->set_userdata($this->postData);
-
-        $this->downloadWasGenerated = TRUE;
-        $this->generateDownload();
-          
-      }
-
     }else{
-
-      if($this->input->post("btnSubmitAdressdaten") != ""){
-
-        $this->data["postVars"] = $this->Validationmodel->getPostVars($this->input);
-        
-         //Adressdaten updaten falls valide
-        if($this->Validationmodel->isValid()){
-          
-          //Validierung OK
-          $this->load->model("Usermodel");
-          $this->Usermodel->updateData($this->input, $this->userdata["id"]);
-
-          $this->session->set_flashdata("flashMessages", "Ihre Daten wurden aktualisiert");
-
-          redirect("home");
-
-        }else{
-          //Validation FEHLER
-          $this->data["error"] = TRUE;
-          $this->data["validationErrors"] = $this->Validationmodel->getValidationErrors();
-        }
-       
-
-      }else{
-        //Formular wurde noch nicht abgesendet, Felder mit Benutzerdaten füllen
-        $this->load->model("Usermodel");
-        $this->data["postVars"] = $this->Usermodel->getUserdata($this->userdata["id"]);
-        if(!$this->data["postVars"]){
-          //Fehler beim auffinden der Userdaten
-          //$this->session->set_flashdata('flashMessages', 'Fehler beim Auslesen der Benutzerdaten');
-          //redirect("home/index");
-        }
-      }
+      //Formular wurde nicht gesendet, Benutzerdaten laden
+      $this->data["userData"] = $this->Usermodel->getUserdata($this->data["userdata"]["id"]);
     }
 
     if(!$this->downloadWasGenerated){
@@ -151,7 +120,7 @@ class Home extends APP_Controller {
     $this->load->library('fpdi');
     $this->load->model("Pdfmodel");
 
-    //foreach data pdf erzeugen
+    //foreach data => pdf erzeugen
 
     $this->fpdi->AddPage();
 
@@ -191,6 +160,8 @@ class Home extends APP_Controller {
       $zip->addFile($tmpPdfFileName);
       $zip->close();
     }
+
+    $this->Usermodel->updatePdfDownloaded($this->userdata["id"]);
 
     $this->session->set_userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME , $tmpZipFileName);
 

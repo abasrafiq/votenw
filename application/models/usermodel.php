@@ -46,8 +46,11 @@ Class Usermodel extends CI_Model{
 
   public function updateData($input, $userID){
     $data = Array(
+      "ansprechpartner" => $input->post("ansprechpartner"),
+      /*
       "nachname" => $input->post("nachname"),
       "vorname" => $input->post("vorname"),
+      */
       "firma" => $input->post("firma"),
       "strasse" => $input->post("strasse"),
       "plz" => $input->post("plz"),
@@ -55,6 +58,14 @@ Class Usermodel extends CI_Model{
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
       "verkaufspreis" => $input->post("verkaufspreis"),
+    );
+    $this->db->where('id', $userID);
+    $this->db->update('users', $data); 
+  }
+
+  public function updatePdfDownloaded($userID){
+    $data = Array(
+      "pdf_downloaded" => 1,
     );
     $this->db->where('id', $userID);
     $this->db->update('users', $data); 

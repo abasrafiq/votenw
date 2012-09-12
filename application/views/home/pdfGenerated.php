@@ -1,14 +1,17 @@
-<h1>Ihre Einladung</h1>
+<h2>Download Ihrer individuellen PDF Dateien</h>
 <?
 if($error){
 ?>
-<h2>Fehler! Ihre Einladung konnte nicht erzeugt werden</h2>
+<p>Fehler! Ihr Download konnte nicht erzeugt werden</p>
 <?
 }else{
 ?>
-  <p>Der Download Ihrer Einladung startet automatisch. Viel Spaß!</p>
+  <p>Der Download Ihrer individuellen PDF-Dateien startet automatisch.</p>
+  
   <iframe src="<?= base_url(); ?>home/pdfDownload"></iframe>
 <?
 }
 ?>
-<a class="btn-norm" href="<?= base_url(); ?>home">Zurück zur Startseite</a>
+<div class="clear"></div>
+<br />
+  <a class="btn-norm" href="<?= base_url(); ?>login/logout">Logout</a>

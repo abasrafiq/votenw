@@ -1,9 +1,178 @@
+/* Props to Eric Meyer (meyerweb.com) for his CSS reset file. We're using an adapted version here	that cuts out some of the reset HTML elements we will never need here (i.e., dfn, samp, etc).
+ * ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dd,
+dl,
+dt,
+li,
+ol,
+ul,
+fieldset,
+form,
+label,
+legend,
+button,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100%;
+  line-height: 1;
+  font-family: inherit;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+html {
+  overflow-y: scroll;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+a:focus {
+  outline: thin dotted;
+}
+a:hover,
+a:active {
+  outline: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button,
+input {
+  line-height: normal;
+  *overflow: visible;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
 /* MEASURES AND SIZES */
 /* COLORS */
 body {
-  background: #ffffff url("../images/bgnoise.gif");
+  background: #373737 url("../images/body_background.gif") repeat-x;
   overflow-y: scroll;
-  padding-top: 35px;
+  min-height: 850px;
 }
 body,
 p,
@@ -11,19 +180,22 @@ label,
 textarea,
 input {
   font-family: Arial;
-  color: #344248;
-  font-size: 12px;
-  line-height: 16px;
+  color: #2c292a;
+  font-size: 13px;
+  line-height: 18px;
 }
 /** COMMON **/
 .center {
   text-align: center;
 }
+strong {
+  font-weight: bold;
+}
 h1 {
   font-size: 35px;
   margin-bottom: 20px;
   padding-bottom: 8px;
-  border-bottom: 1px dashed #344248;
+  border-bottom: 1px dashed #2c292a;
   text-shadow: -1px -1px 3px #ffffff;
   text-transform: uppercase;
 }
@@ -33,10 +205,10 @@ h1 span {
 }
 h2 {
   font-size: 14px;
-  line-height: 14px;
+  line-height: 20px;
   color: #218bbf;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   padding: 0;
 }
 h3 {
@@ -59,7 +231,7 @@ h5 {
   display: inline-block;
 }
 p {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
 }
 p.subline {
   color: #bbb;
@@ -70,7 +242,7 @@ a {
 }
 .divider {
   margin-top: 10px;
-  border-bottom: 1px dashed #344248;
+  border-bottom: 1px dashed #2c292a;
   margin-bottom: 10px;
   clear: both;
 }
@@ -90,7 +262,7 @@ iframe {
   display: none;
 }
 .lightGray {
-  color: #868a93;
+  color: #999999;
 }
 /** TABLES **/
 table {
@@ -113,7 +285,7 @@ table th {
 }
 table tr {
   margin-top: 3px;
-  border-bottom: 1px dashed #344248;
+  border-bottom: 1px dashed #2c292a;
 }
 table tr.nodashed {
   border-bottom: 0;
@@ -134,7 +306,7 @@ table p {
   font-size: 14px;
   font-weight: bold;
   color: #ffffff;
-  padding: 7px 50px 7px 20px;
+  padding: 8px 50px 8px 20px;
   cursor: pointer;
   border: 2px solid white;
   background: #008cd4;
@@ -174,11 +346,9 @@ textarea:focus {
   border-color: rgba(206, 35, 91, 0.8);
 }
 label {
-  color: #868a93;
+  color: #999999;
   display: block;
-}
-.form-row {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 input,
 textarea,
@@ -189,7 +359,7 @@ select {
 .formRow {
   overflow: hidden;
   clear: both;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 input[type="text"] {
   width: 175px;
@@ -202,14 +372,20 @@ input[type="text"] {
   -moz-box-shadow: 0 -3px 0px 0px #cdcdcd;
   box-shadow: 0 -1px 3px 0px #cdcdcd;
 }
+/** NAV TOP **/
+.navbar {
+  display: none;
+}
 /** CONTENT **/
 #wrapper {
-  width: 1000px;
+  width: 1110px;
   margin: 0 auto;
-  background: white;
+  background: #000000 url(../images/wrapper_background.jpg) center top no-repeat;
+  min-height: 675px;
+  overflow: hidden;
 }
 #content {
-  padding: 275px 0 0 45px;
+  padding: 275px 0 0 100px;
   width: 410px;
 }
 #content ul {
@@ -240,8 +416,18 @@ input[type="text"] {
   float: left;
   width: 118px;
 }
+#dfpdf_form #h2Verkaufspreis {
+  padding-top: 14px;
+}
 #dfpdf_form input#verkaufspreis {
   width: 70px;
+  margin-top: 10px;
+}
+#dfpdf_form input[type="submit"] {
+  margin-top: 10px;
+}
+#dfpdf_form #pflichtangaben {
+  padding-top: 10px;
 }
 #flashMessages {
   position: fixed;
@@ -255,7 +441,21 @@ input[type="text"] {
   font-size: 15px;
   text-transform: uppercase;
 }
+/** FOOTER */
+#containerFooter {
+  width: 1110px;
+  margin: 0 auto;
+  clear: both;
+}
+#footer {
+  font-size: 11px;
+  padding-left: 100px;
+  color: #9f9fa0;
+}
 /* Login */
+#containerLogin {
+  padding-top: 30px;
+}
 #containerLogin input[type=text],
 #containerLogin input[type=password] {
   font-weight: bold;
@@ -267,4 +467,6 @@ input[type="text"] {
 #containerLogin #btnLogin {
   float: left;
   margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }

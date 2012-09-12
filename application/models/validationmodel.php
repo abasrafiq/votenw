@@ -18,6 +18,7 @@ Class Validationmodel extends CI_Model
   **/
   public function validateGenPdfForm($input){
     $this->postVars = Array(
+      "ansprechpartner" => $input->post("ansprechpartner"),
       "nachname" => $input->post("nachname"),
       "vorname" => $input->post("vorname"),
       "firma" => $input->post("firma"),
@@ -29,15 +30,47 @@ Class Validationmodel extends CI_Model
       "verkaufspreis" => $input->post("verkaufspreis"),
     );
 
-    if($input->post("nachname") == ""){
+    if($input->post("firma") == ""){
       $this->isValid = FALSE;
-      $this->validationErrors[] = "Bitte geben Sie Ihren Nachnamen an";
+      $this->validationErrors[] = "Bitte geben Sie Ihren Firmennamen an";
     }
 
+    if($input->post("ansprechpartner") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Einen Ansprechpartner an";
+    }
+
+    if($input->post("strasse") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Ihre Straße an";
+    }
+
+    if($input->post("plz") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Ihre Postleitzahl an";
+    }
+
+    if($input->post("ort") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Ihren Ort an";
+    }
+
+    if($input->post("telefon") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Ihre Telefonnummer an";
+    }
+
+    if($input->post("verkaufspreis") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie Ihren gewünschten Verkaufspreis an";
+    }
+
+    /*
     if($input->post("email") == "" || !valid_email($input->post("email"))){
       $this->isValid = FALSE;
       $this->validationErrors[] = "Bitte geben Sie eine korrekte E-Mail Adresse an";
     }
+    */
 
   }
 
