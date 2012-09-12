@@ -236,7 +236,7 @@ p.subline {
   font-size: 17px;
 }
 a {
-  color: #ce235b;
+  color: #218bbf;
 }
 .divider {
   margin-top: 10px;
@@ -390,6 +390,7 @@ input[type="text"] {
 }
 /** CONTENT **/
 #wrapper {
+  position: relative;
   width: 1110px;
   margin: 0 auto;
   background: #000000 url(../images/wrapper_background.jpg) center top no-repeat;
@@ -439,6 +440,22 @@ input[type="text"] {
   font-size: 11px;
   display: block;
   margin: 5px 0;
+}
+#validationError {
+  position: absolute;
+  top: 523px;
+  left: 547px;
+  display: block;
+  width: 320px;
+}
+#frmRowTeilnahmebedingungen {
+  font-size: 11px;
+  margin: 10px 0 5px 0;
+  padding: 0 0 10px 3px;
+  border-bottom: 1px solid #dedede;
+}
+#containerSubmitButtons {
+  padding-top: 8px;
 }
 #flashMessages {
   position: fixed;

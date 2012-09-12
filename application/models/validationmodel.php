@@ -71,6 +71,11 @@ Class Validationmodel extends CI_Model
       $this->validationErrors[] = "Bitte geben Sie eine korrekte E-Mail Adresse an";
     }
 
+    if($input->post("chkTeilnahmebedingungen") != 1){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte akzeptieren Sie die Teilnahmebedingungen";
+    }
+
   }
 
   public function isValid(){

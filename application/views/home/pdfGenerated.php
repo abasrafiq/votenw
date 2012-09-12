@@ -2,7 +2,7 @@
 <?
 if($error){
 ?>
-<p>Fehler! Ihr Download konnte nicht erzeugt werden</p>
+<p class="error">Fehler! Ihr Download konnte nicht erzeugt werden</p>
 <?
 }else{
 ?>

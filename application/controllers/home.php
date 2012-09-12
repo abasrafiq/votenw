@@ -89,6 +89,7 @@ class Home extends APP_Controller {
     $tmpFileName = $this->session->userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME );
 
     if($this->downloadFileExists()){
+      header('Content-type: application/zip');
       header('Content-Disposition: attachment; filename="'.$this->downloadFileName.'"');
       readfile($tmpFileName);
       unlink($tmpFileName);

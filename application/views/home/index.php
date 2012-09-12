@@ -209,13 +209,9 @@ if($pdfErrorMessages){
 ?>
 
 
-<?php
-if($validationErrors){
-?>
-<span class="error" id="validationError">Bitte füllen Sie alle Pflichtfelder aus und achten Sie auf eine korrekte E-Mail Adresse.</span>
-<?php
-} 
-?>
+<div class="frmRow" id="frmRowTeilnahmebedingungen">
+  <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
+</div>
 
 <div class="container_50_50">
   <div class="containerLeft">
@@ -246,9 +242,8 @@ if($validationErrors){
   </div>
 </div>
 
-<br />
 
-<div class="container_50_50">
+<div class="container_50_50" id="containerSubmitButtons">
   <div class="containerLeft">
 
   <?php
@@ -269,6 +264,16 @@ if($validationErrors){
 
   </div>
 </div>
+
+<?php
+if($validationErrors){
+?>
+<span class="error" id="validationError">
+  Bitte füllen Sie alle Pflichtfelder,achten Sie auf eine korrekte E-Mail Adresse und akzeptieren Sie die Teilnahmebedingungen.
+</span>
+<?php
+} 
+?>
 
 <?php
 echo form_close();
