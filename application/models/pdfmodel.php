@@ -13,14 +13,14 @@ Class Pdfmodel extends CI_Model
     //Alle vorhanden Templates mit Felddefintionen
     $this->data = Array(
 
-      "Template1" => Array(
-        "filename" => "xy.pdf",
-        "name_x" => 20,
-        "name_y" => 50
+      "Template2" => Array(
+        "filename" => "regEx_CS.pdf",
+        "name_x" => 200,
+        "name_y" => 10
       ),
 
-      "Template2" => Array(
-        "filename" => "zzz.pdf",
+      "Template1" => Array(
+        "filename" => "jquery.pdf",
         "name_x" => 20,
         "name_y" => 50
       ),

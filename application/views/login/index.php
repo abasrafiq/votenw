@@ -20,7 +20,7 @@
   <?php echo validation_errors(); ?>
   <?php echo form_open('verifylogin'); ?>
     
-      <input type="text" size="20" id="code" name="code" value="12345" />
+      <input type="text" size="20" id="code" name="code" value="666532" />
 
     <input type="submit" id="btnLogin" value="Anmelden" class="btn-norm" />
     

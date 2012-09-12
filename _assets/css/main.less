@@ -3,9 +3,7 @@
 @import "variables.less";
 
 body{
-  background: #373737 url("../images/body_background.gif") repeat-x;
-  overflow-y: scroll;
-  min-height: 850px;
+  background: #444444 url("../images/body_background.gif") repeat-x;
 }
 body,
 p,
@@ -182,37 +180,38 @@ table p{
   background: url("../images/btn-norm-back.png") right top no-repeat, -webkit-gradient(
     linear, left top, left bottom, 
     from(#008cd4),
-    to(#008cd4));
+    to(#008cd4)
+  );
 }
 a.btn-norm{
   text-decoration: none;
 }
-.btn-grey{
-  background: -moz-linear-gradient(
-    top,
-    #cbcece 0%,
-    #aeb0b1);
-  background: -webkit-gradient(
-    linear, left top, left bottom, 
-    from(#cbcece),
-    to(#aeb0b1));
-  letter-spacing: 0;
-  border: 1px solid #a2a3a3;
-}
-.btn-grey:hover{
-  background: -moz-linear-gradient(
-    top,
-    #cbcece 0%,
-    #999999);
-  background: -webkit-gradient(
-    linear, left top, left bottom, 
-    from(#cbcece),
-    to(#999999));
-}
 .btn-small{
   font-size: 12px;
-  padding: 6px;
+  padding: 3px 46px;
   text-transform: none;
+}
+.btn-beige{
+  background: #b4adaa;
+  background: -moz-linear-gradient(
+    top,
+    #d7d1cd 0%,
+    #b4adaa);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#d7d1cd),
+    to(#b4adaa));
+}
+.btn-beige:hover{
+  background: #b4adaa;
+  background: -moz-linear-gradient(
+    top,
+    #b4adaa 0%,
+    #d7d1cd);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#b4adaa),
+    to(#b4adaa));
 }
 
 
@@ -266,7 +265,7 @@ input[type="text"]{
   overflow: hidden;
 }
 #content{
-  padding: 275px 0 0 @content-padding-left;
+  padding: 240px 0 0 @content-padding-left;
   width: 410px;
 }
 #content ul{
@@ -319,11 +318,10 @@ input[type="text"]{
   width: 70px;
   margin-top: 10px;
 }
-#dfpdf_form input[type="submit"]{
-  margin-top: 10px;
-}
-#dfpdf_form  #pflichtangaben{
-  padding-top: 10px;
+#dfpdf_form  #validationError{
+  font-size: 11px;
+  display: block;
+  margin: 5px 0;
 }
 
 
@@ -344,16 +342,13 @@ input[type="text"]{
 /** FOOTER */
 #containerFooter{
   width: @wrapper-width;
-  
   margin: 0 auto;
   clear: both;
-  
 }
 #footer{
   font-size: 11px;
   padding-left: @content-padding-left;
   color: #9f9fa0;
-  
 }
 
 
@@ -365,14 +360,13 @@ input[type="text"]{
 #containerLogin input[type=password]
 {
   font-weight: bold;
-  padding: 6px;
-  width: 240px;
+  font-size: 14px;
+  padding: 8px;
+  width: 235px;
   float: left;
   margin-right: 10px;
 }
 #containerLogin #btnLogin{
   float: left;
   margin: 0;
-  padding-top: 6px;
-  padding-bottom: 6px;
 }

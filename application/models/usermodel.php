@@ -6,7 +6,7 @@ Class Usermodel extends CI_Model{
 
   function login($code){
    $this -> db -> select('*');
-   $this -> db -> from('users');
+   $this -> db -> from('pdf_users');
    $this -> db -> where('code = ' . "'" . $code . "'");
    $this -> db -> limit(1);
 
@@ -25,7 +25,7 @@ Class Usermodel extends CI_Model{
   //Gibt alle Benutzerdaten aus der Datenbank zurück oder FALSE wenn Benutzer via Code nicht gefunden
   public function getUserdata($id){
     $this -> db -> select('*');
-    $this -> db -> from('users');
+    $this -> db -> from('pdf_users');
     $this -> db -> where('id = ' . "'" . $id . "'");
     $this -> db -> limit(1);
 
@@ -58,9 +58,10 @@ Class Usermodel extends CI_Model{
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
       "verkaufspreis" => $input->post("verkaufspreis"),
+      "www" => $input->post("www"),
     );
     $this->db->where('id', $userID);
-    $this->db->update('users', $data); 
+    $this->db->update('pdf_users', $data); 
   }
 
   public function updatePdfDownloaded($userID){
@@ -68,7 +69,7 @@ Class Usermodel extends CI_Model{
       "pdf_downloaded" => 1,
     );
     $this->db->where('id', $userID);
-    $this->db->update('users', $data); 
+    $this->db->update('pdf_users', $data); 
   }
 
 

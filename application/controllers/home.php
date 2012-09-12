@@ -35,7 +35,6 @@ class Home extends APP_Controller {
         //Validierung OK, Userdaten speichern
         
         $this->Usermodel->updateData($this->input, $this->userdata["id"]);
-
         $this->session->set_userdata($this->postData);
 
         if($this->input->post("btnSubmitForm") != ""){
@@ -114,52 +113,84 @@ class Home extends APP_Controller {
   */
   private function generateDownload(){
 
-    $templateFileName = "uploads/_pdfTemplates/jQuery-17-Visual-Cheat-Sheet.pdf";
+    $countTemplates = 0;
 
-    $this->load->library('fpdf');
-    $this->load->library('fpdi');
     $this->load->model("Pdfmodel");
+    $arTtmpPdfFileNames = Array(); //Alle erzeugten temporären PDF Dateien die wieder gelöscht werden
 
-    //foreach data => pdf erzeugen
+    $templates = $this->Pdfmodel->getData();
 
-    $this->fpdi->AddPage();
+    
 
-    //Set the source PDF file
-    $pagecount = $this->fpdi->setSourceFile($templateFileName);
-
-    //Import the first page of the file
-    $tpl = $this->fpdi->importPage(1);
-
-    //Use this page as template
-    $this->fpdi->useTemplate($tpl, 20, 30, 170);
-
-    $this->fpdi->SetFont('Arial','',8);
-    $this->fpdi->SetTextColor(0,0,0);
-    $this->fpdi->SetXY(20, 20);
-    //$this->fpdi->Rotate(90);
-    //$this->fpdi->Image('think.jpg',120,240,20,20);
-    //$this->fpdi->Image('think.jpg',120,260,20,20);
-    $this->fpdi->Write(0, $this->session->userdata("pdfData_nachname")." ".$this->session->userdata("pdfData_email"));
-
-    /*
-    * Output Options
-    * I: send the file inline to the browser. The plug-in is used if available. The name given by name is used when one selects the "Save as" option on the link generating the PDF.
-    * D: send to the browser and force a file download with the name given by name.
-    * F: save to a local file with the name given by name (may include a path).
-    * S: return the document as a string. name is ignored.
-    */
-    $tmpPdfFileName = "tmp/df_".md5(time()).".pdf";
-    $this->fpdi->Output($tmpPdfFileName, "F");
-
+    //ZIP Datei erstellen
     $tmpZipFileName = "tmp/".md5(time()).".zip";
-
-    //ZIP ALL PDFs
     $zip = new ZipArchive;
-    $resource = $zip->open( $tmpZipFileName, ZipArchive::CREATE );
-    if ($resource === TRUE){
-      $zip->addFile($tmpPdfFileName);
-      $zip->close();
+    $zipResource = $zip->open( $tmpZipFileName, ZipArchive::CREATE );
+    if ($zipResource == FALSE){
+      die("Konnte zip-Download nicht erzeugen");
     }
+
+    foreach($templates as $template){
+      $this->load->library('fpdf');
+      $this->load->library('fpdi');
+      //globale PDF Einstellungen
+      $this->fpdi->SetFont('Arial','',8);
+      $this->fpdi->SetTextColor(0,0,0);
+
+      $countTemplates ++;
+
+      $templateFileName = "uploads/_pdfTemplates/".$template["filename"];
+
+      if(!file_exists($templateFileName)){
+        die("Konnte Templatedatei nicht finden");
+      }
+
+      //Set the source PDF file
+      $pagecount = $this->fpdi->setSourceFile($templateFileName);
+
+      $this->fpdi->AddPage();
+
+      //Import the first page of the file
+      $tpl = $this->fpdi->importPage(1);
+
+      //Use this page as template
+      $this->fpdi->useTemplate($tpl, 0, 0);
+
+      
+      $this->fpdi->SetXY(20, 20);
+      //$this->fpdi->Rotate(90);
+      //$this->fpdi->Image('think.jpg',120,240,20,20);
+      //$this->fpdi->Image('think.jpg',120,260,20,20);
+      $this->fpdi->Write(0, $this->session->userdata("telefon")." ".$this->session->userdata("email"));
+
+
+
+      /*
+      * Output Options
+      * I: send the file inline to the browser. The plug-in is used if available. The name given by name is used when one selects the "Save as" option on the link generating the PDF.
+      * D: send to the browser and force a file download with the name given by name.
+      * F: save to a local file with the name given by name (may include a path).
+      * S: return the document as a string. name is ignored.
+      */
+      $tmpPdfFileName = "tmp/df_".md5(time())."_".$countTemplates.".pdf";
+      //erzeugte temporäre Datei Ablegen, wird später gelöscht
+      $arTtmpPdfFileNames[] = $tmpPdfFileName;
+      $this->fpdi->Output($tmpPdfFileName, "F");
+      $this->fpdi->Close();
+
+      //PDF zu zip hinzufügen
+      $zip->addFile($tmpPdfFileName);
+      
+    }
+
+    $zip->close();
+
+    
+    //Alle temporären PDFs löschen
+    foreach($arTtmpPdfFileNames as $tmpPdfFileName){
+      unlink($tmpPdfFileName);
+    }
+
 
     $this->Usermodel->updatePdfDownloaded($this->userdata["id"]);
 

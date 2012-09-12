@@ -28,6 +28,7 @@ Class Validationmodel extends CI_Model
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
       "verkaufspreis" => $input->post("verkaufspreis"),
+      "www" => $input->post("www"),
     );
 
     if($input->post("firma") == ""){
@@ -65,12 +66,10 @@ Class Validationmodel extends CI_Model
       $this->validationErrors[] = "Bitte geben Sie Ihren gewünschten Verkaufspreis an";
     }
 
-    /*
     if($input->post("email") == "" || !valid_email($input->post("email"))){
       $this->isValid = FALSE;
       $this->validationErrors[] = "Bitte geben Sie eine korrekte E-Mail Adresse an";
     }
-    */
 
   }
 

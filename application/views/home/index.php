@@ -3,39 +3,7 @@
   Bitte überprüfen Sie die von uns angegebenen Daten und geben Sie mögliche Änderungen bitte entsprechend ein. <span class="lightGray" id="pflichtangaben">(* = Pflichtfeld)</span>
 </p>
 
-<?php
-if($pdfErrorMessages){
-?>
-<h3 class="error">Beim Erzeugen der PDF Dateien sind Fehler aufgetreten:</h3>
-<ul class="error">
-  <?php
-    foreach($pdfErrorMessages as $error){
-  ?>
-    <li><?= $error ?></li>
-  <?php
-    }
-  ?>
-</ul>
-<?
-}
-?>
 
-<?php
-if($validationErrors){
-?>
-<h3 class="error">Es sind Fehler aufgetreten:</h3>
-<ul class="error">
-  <?php
-    foreach($validationErrors as $error){
-  ?>
-    <li><?= $error ?></li>
-  <?php
-    }
-  ?>
-</ul>
-<?
-}
-?>
 
 
 <?php
@@ -107,7 +75,29 @@ echo form_open("", $formAttributes);
         ?>
       </div>
 
-      <h2 id="h2Verkaufspreis">Ihr Verkaufspreis in Euro.*</h2>
+
+
+      <?php
+      //Feld
+      //############################
+      $fieldName = "www";
+      $data = array(
+        'name'        => $fieldName,
+        'id'          => $fieldName,
+        'value'       => $userData[$fieldName],
+      );
+      ?>
+
+      <div class="formRow">
+        <label for="<?php echo($fieldName); ?>">Internetadresse</label>
+        <?php
+          echo form_input($data);
+        ?>
+      </div>
+
+
+
+      
 
   </div>
 
@@ -181,13 +171,60 @@ echo form_open("", $formAttributes);
     ?>
 
     <div class="formRow">
-      <label for="<?php echo($fieldName); ?>">E-Mail</label>
+      <label for="<?php echo($fieldName); ?>">E-Mail Adresse *</label>
       <?php
         echo form_input($data);
       ?>
     </div>
 
 
+    <?php
+    //SUBMIT BUTTON ADRESSDATEN
+    //############################
+    ?>
+    <div class="formRow" id="formRowSubmitAdressdaten">
+      <label>&nbsp;</label>
+      <?php
+        echo form_submit('btnSubmitAdressdaten', 'Daten speichern', 'class="btn-norm btn-small btn-beige"');
+      ?>
+    </div>
+
+
+
+    
+
+  
+
+
+  </div>
+</div>
+<div class="clear"></div>
+
+<?php
+if($pdfErrorMessages){
+?>
+<p class="error">Beim Erzeugen der PDF Dateien sind Fehler aufgetreten.</p>
+<?php
+} 
+?>
+
+
+<?php
+if($validationErrors){
+?>
+<span class="error" id="validationError">Bitte füllen Sie alle Pflichtfelder aus und achten Sie auf eine korrekte E-Mail Adresse.</span>
+<?php
+} 
+?>
+
+<div class="container_50_50">
+  <div class="containerLeft">
+
+    <h2 id="h2Verkaufspreis">Ihr Verkaufspreis in Euro.*</h2>
+
+  </div>
+
+  <div class="containerRight">
 
     <?php
     //Feld
@@ -200,49 +237,39 @@ echo form_open("", $formAttributes);
       'maxlength'   => '100',
     );
     ?>
-
     <div class="formRow">
       <?php
         echo form_input($data);
       ?>
     </div>
 
-
-
   </div>
 </div>
-<div class="clear"></div>
+
+<br />
 
 <div class="container_50_50">
   <div class="containerLeft">
 
+  <?php
+  //SUBMIT BUTTON PDF GENERIEREN
+  //############################
+  ?>
+  <div class="formRow">
     <?php
-    //SUBMIT BUTTON ADRESSDATEN
-    //############################
+      echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm"');
     ?>
-    <div class="formRow">
-    <?php
-      echo form_submit('btnSubmitAdressdaten', 'Daten speichern', 'class="btn-norm"');
-    ?>
-    </div>
+  </div>
 
   </div>
 
   <div class="containerRight">
 
-    <?php
-    //SUBMIT BUTTON PDF GENERIEREN
-    //############################
-    ?>
-    <div class="formRow">
-      <?php
-        echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm"');
-      ?>
-    </div>
+    
 
   </div>
 </div>
 
 <?php
 echo form_close();
-?>
+?>    

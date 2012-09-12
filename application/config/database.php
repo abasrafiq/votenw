@@ -55,9 +55,9 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
   $db['default']['database'] = 'dfpdf'; 
 }else{
   $db['default']['hostname'] = 'localhost';
-  $db['default']['username'] = 'dflager_adm';
-  $db['default']['password'] = 'EcUKB7YDuRntwyFw';
-  $db['default']['database'] = 'dflager';
+  $db['default']['username'] = 'smm_admin';
+  $db['default']['password'] = 'sfyQ5NcjxyS3mqNC';
+  $db['default']['database'] = 'samsung_mobile_mail';
 }
 
 $db['default']['dbdriver'] = 'mysql';
