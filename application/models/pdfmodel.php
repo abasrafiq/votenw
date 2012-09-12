@@ -18,7 +18,9 @@ Class Pdfmodel extends CI_Model
         "firma_x" => 10,
         "firma_y" => 10,
         "telefon_x" => 10,
-        "telefon_y" => 30
+        "telefon_y" => 30,
+        "verkaufspreis_x" => 10,
+        "verkaufspreis_y" => 50
       ),
 
       "Template1" => Array(
@@ -26,7 +28,9 @@ Class Pdfmodel extends CI_Model
         "firma_x" => 20,
         "firma_y" => 10,
         "telefon_x" => 20,
-        "telefon_y" => 50
+        "telefon_y" => 50,
+        "verkaufspreis_x" => 20,
+        "verkaufspreis_y" => 70
       ),
 
     );

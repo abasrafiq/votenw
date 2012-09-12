@@ -302,9 +302,10 @@ table p {
 /* BUTTONS */
 .btn-norm {
   font-size: 14px;
+  line-height: 15px;
   font-weight: bold;
   color: #ffffff;
-  padding: 8px 50px 8px 20px;
+  padding: 10px 50px 10px 20px;
   cursor: pointer;
   border: 2px solid white;
   background: #008cd4;
@@ -320,12 +321,25 @@ table p {
   background: url("../images/btn-norm-back.png") right top no-repeat, -moz-linear-gradient(top, #008cd4 0%, #008cd4);
   background: url("../images/btn-norm-back.png") right top no-repeat, -webkit-gradient(linear, left top, left bottom, from(#008cd4), to(#008cd4));
 }
-a.btn-norm {
+.btn-back {
+  padding-right: 20px;
+  padding-left: 50px;
+  background: #b0aaa6;
+  background: url("../images/btn-back-background.png") left top no-repeat, -moz-linear-gradient(top, #dad3d0 0%, #b0aaa6);
+  background: url("../images/btn-back-background.png") left top no-repeat, -webkit-gradient(linear, left top, left bottom, from(#dad3d0), to(#b0aaa6));
+}
+.btn-back:hover {
+  background: #b0aaa6;
+  background: url("../images/btn-back-background.png") left top no-repeat, -moz-linear-gradient(top, #b0aaa6 0%, #dad3d0);
+  background: url("../images/btn-back-background.png") left top no-repeat, -webkit-gradient(linear, left top, left bottom, from(#b0aaa6), to(#dad3d0));
+}
+a.btn-norm,
+a.btn-back {
   text-decoration: none;
 }
 .btn-small {
   font-size: 12px;
-  padding: 3px 46px;
+  padding: 5px 46px;
   text-transform: none;
 }
 .btn-beige {
@@ -433,7 +447,7 @@ input[type="text"] {
   z-index: 9999;
   text-align: center;
   color: #ffffff;
-  background: #de1254;
+  background: #006eac;
   line-height: 40px;
   font-size: 15px;
   text-transform: uppercase;
@@ -457,7 +471,7 @@ input[type="text"] {
 #containerLogin input[type=password] {
   font-weight: bold;
   font-size: 14px;
-  padding: 8px;
+  padding: 10px;
   width: 235px;
   float: left;
   margin-right: 10px;

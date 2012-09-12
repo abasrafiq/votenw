@@ -14,4 +14,4 @@ if($error){
 ?>
 <div class="clear"></div>
 <br />
-  <a class="btn-norm" href="<?= base_url(); ?>login/logout">Logout</a>
+<a class="btn-norm btn-back" href="<?= base_url(); ?>home">Zurück</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn-norm" href="<?= base_url(); ?>login/logout">Logout</a>

@@ -168,13 +168,17 @@ class Home extends APP_Controller {
       //Firma
       $fieldName = "firma";
       $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
-      $fpdi->Write(0, $this->session->userdata($fieldName));
+      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName)));
 
       //Telefon
       $fieldName = "telefon";
       $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
-      $fpdi->Write(0, $this->session->userdata($fieldName));
+      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName)));
 
+      //Telefon
+      $fieldName = "verkaufspreis";
+      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
+      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName))." ".iconv("UTF-8", "CP1252", "€"));
 
 
       /*
