@@ -185,7 +185,7 @@ echo form_open("", $formAttributes);
     <div class="formRow" id="formRowSubmitAdressdaten">
       <label>&nbsp;</label>
       <?php
-        echo form_submit('btnSubmitAdressdaten', 'Daten speichern', 'class="btn-norm btn-small btn-beige"');
+        echo form_submit('btnSubmitAdressdaten', 'Daten speichern', 'class="btn-norm btn-small"');
       ?>
     </div>
 
@@ -245,35 +245,40 @@ if($pdfErrorMessages){
 <div class="container_50_50" id="containerSubmitButtons">
   <div class="containerLeft">
 
-  <?php
-  //SUBMIT BUTTON PDF GENERIEREN
-  //############################
-  ?>
-  <div class="formRow">
     <?php
-      echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm"');
+    //SUBMIT BUTTON PDF GENERIEREN
+    //############################
     ?>
-  </div>
+    <div class="formRow">
+      <?php
+        echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm block"');
+      ?>
+    </div>
 
   </div>
 
   <div class="containerRight">
-
     
+    <div class="formRow">
+      <a id="aRechnungHochladen" class="btn-norm btn-beige block" href="<?= base_url(); ?>upload">Rechnungen</a>
+    </div>
 
   </div>
 </div>
 
 <?php
+echo form_close();
+?> 
+
+
+<?php
 if($validationErrors){
 ?>
 <span class="error" id="validationError">
-  Bitte füllen Sie alle Pflichtfelder,achten Sie auf eine korrekte E-Mail Adresse und akzeptieren Sie die Teilnahmebedingungen.
+  Bitte füllen Sie alle Pflichtfelder aus, achten Sie auf eine korrekte E-Mail Adresse und akzeptieren Sie die Teilnahmebedingungen.
 </span>
 <?php
 } 
 ?>
 
-<?php
-echo form_close();
-?>    
+   

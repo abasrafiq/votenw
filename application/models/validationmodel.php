@@ -14,7 +14,30 @@ Class Validationmodel extends CI_Model
   }
 
   /**
-  * Validate User Form for PDF generation
+  /* Validate Uploads (invoces)
+  **/
+  public function validateUpload($input){
+    $this->postVars = Array(
+      "file" => $input->post("file"),
+      "type_id" => $input->post("type_id"),
+      "price" => $input->post("price"),
+    );
+
+    if($input->post("price") == ""){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte geben Sie einen Preis an";
+    }
+
+    if($input->post("type_id") <= 0){
+      $this->isValid = FALSE;
+      $this->validationErrors[] = "Bitte wählen Sie einen Anzeigentyp aus an";
+    }
+  }
+
+
+
+  /**
+  /* Validate User Form for PDF generation
   **/
   public function validateGenPdfForm($input){
     $this->postVars = Array(

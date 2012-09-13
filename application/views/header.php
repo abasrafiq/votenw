@@ -25,6 +25,10 @@
             <link href="<?php echo(base_url()); ?>_assets/css/ie7.css" rel="stylesheet" type="text/css" />
     <![endif]-->
 
+    <script>
+      var baseUrl = "<?= base_url(); ?>";
+    </script>
+
   </head>
   <body>
 
