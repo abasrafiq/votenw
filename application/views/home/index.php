@@ -208,12 +208,7 @@ if($pdfErrorMessages){
 } 
 ?>
 
-
-<div class="frmRow" id="frmRowTeilnahmebedingungen">
-  <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
-</div>
-
-<div class="container_50_50">
+<div class="container_50_50" id="containerVerkaufspreis">
   <div class="containerLeft">
 
     <h2 id="h2Verkaufspreis">Ihr Verkaufspreis in Euro.*</h2>
@@ -240,6 +235,10 @@ if($pdfErrorMessages){
     </div>
 
   </div>
+</div>
+
+<div class="frmRow" id="frmRowTeilnahmebedingungen">
+  <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
 </div>
 
 

@@ -189,7 +189,7 @@ class Home extends APP_Controller {
       * F: save to a local file with the name given by name (may include a path).
       * S: return the document as a string. name is ignored.
       */
-      $tmpPdfFileName = "tmp/df_".md5(time())."_".$countTemplates.".pdf";
+      $tmpPdfFileName = "tmp/".$template[$fileName]."_".$this->userdata["id"].".pdf";
       //erzeugte temporäre Datei Ablegen, wird später gelöscht
       $arTtmpPdfFileNames[] = $tmpPdfFileName;
       $fpdi->Output($tmpPdfFileName, "F");
