@@ -42,7 +42,7 @@ Class Uploadmodel extends CI_Model{
   /**
   /* Update upload field
   */
-  public function updateUpload($field, $value, $md5, $userID){
+  public function update($field, $value, $md5, $userID){
     $arReturn = Array(
       "error" => FALSE,
       "message" => "Rechnung wurde aktualisiert",
@@ -60,6 +60,37 @@ Class Uploadmodel extends CI_Model{
     $this->db->update('pdf_invoices', $data); 
 
 
+
+    return $arReturn;
+  }
+
+
+
+
+  /**
+  /* Update upload field
+  */
+  public function delete($md5, $userID){
+    $arReturn = Array(
+      "error" => FALSE,
+      "message" => "Upload wurde gelöscht",
+    );
+
+    $this -> db -> select('*');
+    $this -> db -> from('pdf_invoices');
+    $this->db->where('user_id', $userID);
+    $this->db->where('md5', $md5);
+    $query = $this -> db -> get();
+    $result =  $query->result_array();
+    $row = $result[0];
+
+
+    $file = "uploads/".$userID."/".$md5.".".pathinfo($row["origFileName"], PATHINFO_EXTENSION);
+    unlink($file);
+
+    $this->db->where('user_id', $userID);
+    $this->db->where('md5', $md5);
+    $this->db->delete('pdf_invoices'); 
 
     return $arReturn;
   }
@@ -84,7 +115,7 @@ Class Uploadmodel extends CI_Model{
     }else{
       $md5 = md5(time());
       $config['upload_path'] = 'uploads/'.$userID;
-      $config['allowed_types'] = 'gif|jpg|png|zip|doc|pdf|rar';
+      $config['allowed_types'] = 'gif|jpg|png|zip|doc|pdf|rar|bmp|jpeg';
       $config['max_size'] = '5000';
       $config['file_name'] = $md5;
 

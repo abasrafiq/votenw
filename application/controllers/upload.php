@@ -35,7 +35,6 @@ class Upload extends APP_Controller {
   }
 
 
-
   public function update(){
 
     $field = "";
@@ -53,8 +52,15 @@ class Upload extends APP_Controller {
         die();
     }
 
-    $arReturn = $this->Uploadmodel->updateUpload($field, $this->input->post("value"), $this->input->post("uploadID"), $this->userdata["id"]);
+    $arReturn = $this->Uploadmodel->update($field, $this->input->post("value"), $this->input->post("uploadID"), $this->userdata["id"]);
 
+    echo json_encode($arReturn);
+  }
+
+
+
+  public function delete(){
+    $arReturn = $this->Uploadmodel->delete($this->input->post("uploadID"), $this->userdata["id"]);    
     echo json_encode($arReturn);
   }
 

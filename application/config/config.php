@@ -15,7 +15,7 @@
 |
 */
 $config['base_url']	= "";
-$config['pageTitle'] = 'Dialogfeld PDF';
+$config['pageTitle'] = 'Samsung Tabanzeigen';
 if($_SERVER["HTTP_HOST"] == "localhost"){
   $config['baseServerPath'] = $_SERVER['DOCUMENT_ROOT']."/dfpdf/";
 }else{
