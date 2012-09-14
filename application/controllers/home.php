@@ -19,7 +19,10 @@ class Home extends APP_Controller {
   
   public function index() {
 
-    $this->data["error"] == FALSE;
+    $this->data["error"] = FALSE;
+    $this->data["pdfErrorMessages"] = Array();
+    $this->data["validationErrors"] = Array();
+    $this->downloadWasGenerated = FALSE;
 
     $this->load->model("Validationmodel");
     $this->Validationmodel->validateGenPdfForm($this->input);
@@ -59,6 +62,7 @@ class Home extends APP_Controller {
     if(!$this->downloadWasGenerated){
       //PDF wurde nicht erzeugt, Startseite/Formular anzeigen
       $this->layout->show('/home/index', $this->data);  
+
     }else{
       //Validierung Ok, PDF wurde erzeugt, Redirect zur direct Download Seite
       redirect("home/downloadGenerated");
@@ -72,10 +76,12 @@ class Home extends APP_Controller {
   /* Auf diese Seite wird weiter geleitet, wenn die Validierung Ok ist und der Download erzeugt wurde
   */
   public function downloadGenerated(){
+
     //PDF wurde erzeugt, View mit verstecktem iFrame zum automatischen Download und die Meldungen anzeigen
     if(!$this->downloadFileExists()){
       $this->data["error"] = TRUE;
     }
+
     $this->layout->show('/home/pdfGenerated', $this->data);
   }
 
@@ -115,16 +121,19 @@ class Home extends APP_Controller {
   private function generateDownload(){
 
     $countTemplates = 0;
-    $fontPath = dirname(__FILE__).'/../../fpdf_fonts/';
+    $fontDir = dirname(__FILE__)."/../../fpdf_fonts/";
     //die($fontPath);
-    define('FPDF_FONTPATH', $fontPath);
+    define('FPDF_FONTPATH', $fontDir);
 
-    require_once("application/libraries/fpdf/fpdf.php");
+    
+    require_once("application/libraries/fpdf/cmykPdf.php");
     require_once("application/libraries/fpdi/fpdi.php");
     $this->load->model("Pdfmodel");
     $arTtmpPdfFileNames = Array(); //Alle erzeugten temporären PDF Dateien die wieder gelöscht werden
 
     $templates = $this->Pdfmodel->getData();
+
+
 
     
 
@@ -139,12 +148,15 @@ class Home extends APP_Controller {
 
     foreach($templates as $template){
 
-      $fpdf = new FPDF;
       $fpdi = new FPDI;
 
+
       //globale PDF Einstellungen
-      $fpdi->SetFont('Helvetica','',8);
-      $fpdi->SetTextColor(0,0,0);
+      $fpdi->AddFont('Arial', '', 'arial.php');;
+      $fpdi->SetFont('Arial','',8);
+      $fpdi->SetTextColor(100, 0, 0, 0);
+
+
 
       $countTemplates ++;
 
@@ -196,6 +208,7 @@ class Home extends APP_Controller {
       //erzeugte temporäre Datei Ablegen, wird später gelöscht
       $arTtmpPdfFileNames[] = $tmpPdfFileName;
       $fpdi->Output($tmpPdfFileName, "F");
+
       $fpdi->Close();
 
       //PDF zu zip hinzufügen
