@@ -115,6 +115,9 @@ class Home extends APP_Controller {
   private function generateDownload(){
 
     $countTemplates = 0;
+    $fontPath = dirname(__FILE__).'/../../fpdf_fonts/';
+    //die($fontPath);
+    define('FPDF_FONTPATH', $fontPath);
 
     require_once("application/libraries/fpdf/fpdf.php");
     require_once("application/libraries/fpdi/fpdi.php");
@@ -140,7 +143,7 @@ class Home extends APP_Controller {
       $fpdi = new FPDI;
 
       //globale PDF Einstellungen
-      $fpdi->SetFont('Arial','',8);
+      $fpdi->SetFont('Helvetica','',8);
       $fpdi->SetTextColor(0,0,0);
 
       $countTemplates ++;
@@ -162,7 +165,7 @@ class Home extends APP_Controller {
       $tpl = $fpdi->importPage(1);
 
       //Use this page as template
-      $fpdi->useTemplate($tpl, 0, 0);
+      $fpdi->useTemplate($tpl, 0, 0, 0, 0, true);
 
       
       //START Einträge schreiben
@@ -189,7 +192,7 @@ class Home extends APP_Controller {
       * F: save to a local file with the name given by name (may include a path).
       * S: return the document as a string. name is ignored.
       */
-      $tmpPdfFileName = "tmp/".$countTemplates."_".$this->userdata["id"].".pdf";
+      $tmpPdfFileName = "tmp/Template_".$countTemplates."_".$this->userdata["id"].".pdf";
       //erzeugte temporäre Datei Ablegen, wird später gelöscht
       $arTtmpPdfFileNames[] = $tmpPdfFileName;
       $fpdi->Output($tmpPdfFileName, "F");
