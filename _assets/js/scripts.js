@@ -1,8 +1,8 @@
-function appInit(){
+$(function(){
 
   initUploads();
 
-}
+});
 
 function initUploads(){
 
@@ -109,6 +109,7 @@ function userMessage (data){
   //alert(data.message);
   
   noty({
+    theme: 'df',
     text: data.message,
     dismissQueue: true,
     timeout: 1500,

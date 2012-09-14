@@ -12,11 +12,10 @@
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>_assets/js/scripts.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/bootstrap.min.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/jquery.noty.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/layouts/top.js"></script> 
-    <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/themes/default.js"></script> 
-
+    <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/themes/df.js"></script> 
+    <script type="text/javascript" src="<?= base_url() ?>_assets/js/scripts.js"></script> 
   </body>
 </html>
