@@ -1,10 +1,5 @@
-body{
-   letter-spacing: 0.03em;
-}
-#containerAntraege .antraegeTeaser *{
-    letter-spacing: 0.03em;
-}
-h1{
-  letter-spacing: 0.001em;
-  font-size: 34px;
+.btn-norm{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
 }
