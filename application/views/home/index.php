@@ -209,12 +209,10 @@ if($pdfErrorMessages){
 ?>
 
 <div class="container_50_50" id="containerVerkaufspreis">
+
   <div class="containerLeft">
-
-    <h2 id="h2Verkaufspreis">Ihr Verkaufspreis in Euro.*</h2>
-
+    <h2 class="h2Verkaufspreis">Preis / Galaxy Note 10.1</h2>
   </div>
-
   <div class="containerRight">
 
     <?php
@@ -226,45 +224,101 @@ if($pdfErrorMessages){
       'id'          => $fieldName,
       'value'       => $userData[$fieldName],
       'maxlength'   => '100',
+      'class'       => 'verkaufspreis'
     );
     ?>
     <div class="formRow">
       <?php
         echo form_input($data);
       ?>
+      Euro inkl. Mwst.
+    </div>
+  </div>
+
+  <!--- -->
+  <div class="containerLeft">
+    <h2 class="h2Verkaufspreis">Preis / Galaxy Tab2 7.0</h2>
+  </div>
+  <div class="containerRight">
+
+    <?php
+    //Feld
+    //############################
+    $fieldName = "verkaufspreis2";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $userData[$fieldName],
+      'maxlength'   => '100',
+      'class'       => 'verkaufspreis'
+    );
+    ?>
+    <div class="formRow">
+      <?php
+        echo form_input($data);
+      ?>
+      Euro inkl. Mwst.
     </div>
 
   </div>
-</div>
 
-<div class="frmRow" id="frmRowTeilnahmebedingungen">
-  <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
+  <!--- -->
+  <div class="containerLeft">
+    <h2 class="h2Verkaufspreis">Preis / Galaxy Tab2 10.1</h2>
+  </div>
+  <div class="containerRight">
+
+    <?php
+    //Feld
+    //############################
+    $fieldName = "verkaufspreis3";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $userData[$fieldName],
+      'maxlength'   => '100',
+      'class'       => 'verkaufspreis'
+    );
+    ?>
+    <div class="formRow">
+      <?php
+        echo form_input($data);
+      ?>
+      Euro inkl. Mwst.
+    </div>
+  </div>
+
+
 </div>
 
 
 <div class="container_50_50" id="containerSubmitButtons">
+  
   <div class="containerLeft">
+    <div class="formRow">
+        <a id="aRechnungHochladen" class="btn-norm btn-beige block" href="<?= base_url(); ?>upload">Upload Rechnung</a>
+      </div>
+  </div>
 
+    <div class="frmRow" id="frmRowTeilnahmebedingungen">
+      <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
+    </div>
+
+  <div class="containerLeft">
     <?php
     //SUBMIT BUTTON PDF GENERIEREN
     //############################
     ?>
     <div class="formRow">
       <?php
-        echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm block"');
+        echo form_submit('btnSubmitForm', 'PDFs generieren', 'class="btn-norm block" id="btnSubmitForm"');
       ?>
     </div>
-
   </div>
 
-  <div class="containerRight">
-    
-    <div class="formRow">
-      <a id="aRechnungHochladen" class="btn-norm btn-beige block" href="<?= base_url(); ?>upload">Rechnungen</a>
-    </div>
-
-  </div>
 </div>
+
+
 
 <?php
 echo form_close();

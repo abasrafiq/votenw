@@ -333,7 +333,7 @@ input[type="text"]{
   width: @wrapper-width;
   margin: 0 auto;
   background: black url(../images/wrapper_background.jpg) center top no-repeat;
-  min-height: 675px;
+  height: 712px;
   overflow: hidden;
 }
 #content{
@@ -383,27 +383,35 @@ input[type="text"]{
   float: left;
   width: 118px;
 }
-#dfpdf_form #h2Verkaufspreis{
+#dfpdf_form .h2Verkaufspreis{
   padding-top: 14px;
 }
-#dfpdf_form input#verkaufspreis{
+#dfpdf_form input.verkaufspreis{
   width: 70px;
-  margin-top: 10px;
+  margin: 10px 8px 0 0;
 }
 #dfpdf_form #containerVerkaufspreis{
   margin: 5px 0 5px 0;
   border-top: 1px solid #dedede;
 }
 #dfpdf_form #frmRowTeilnahmebedingungen{
-  font-size: 11px;
-  margin: 5px 0 5px 0;
+  clear: both;
+  margin: 12px 0 12px 0;
   padding: 10px 0 0px 3px;
-  border-top: 1px solid #dedede;
 }
 #dfpdf_form #containerSubmitButtons{
-  padding-top: 8px;
+  position: absolute;
+  top: 520px;
+  left: 550px;
+  
 }
-
+#dfpdf_form #containerSubmitButtons .containerLeft{
+  width: 200px;
+}
+#dfpdf_form #btnSubmitForm{
+  width: 100%;
+  text-align: left;
+}
 
 
 /* UPLOADS */
@@ -433,8 +441,8 @@ input[type="text"]{
   display: block;
   margin: 5px 0;
   position: absolute;
-  top: 531px;
-  left: 547px;
+  top: 641px;
+  left: @content-padding-left;
   display: block;
   width: 320px;
 }

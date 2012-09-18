@@ -148,15 +148,13 @@ class Home extends APP_Controller {
 
     foreach($templates as $template){
 
-      $fpdi = new FPDI;
+      $fpdi = new FPDI("L");
 
 
       //globale PDF Einstellungen
       $fpdi->AddFont('Arial', '', 'arial.php');;
       $fpdi->SetFont('Arial','',8);
       $fpdi->SetTextColor(100, 0, 0, 0);
-
-
 
       $countTemplates ++;
 
@@ -165,8 +163,6 @@ class Home extends APP_Controller {
       if(!file_exists($templateFileName)){
         die("Konnte Templatedatei nicht finden");
       }
-
-
 
       //Set the source PDF file
       $pagecount = $fpdi->setSourceFile($templateFileName);
@@ -177,7 +173,7 @@ class Home extends APP_Controller {
       $tpl = $fpdi->importPage(1);
 
       //Use this page as template
-      $fpdi->useTemplate($tpl, 0, 0, 0, 0, true);
+      $fpdi->useTemplate($tpl);
 
       
       //START Einträge schreiben

@@ -51,6 +51,8 @@ Class Validationmodel extends CI_Model
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
       "verkaufspreis" => $input->post("verkaufspreis"),
+      "verkaufspreis2" => $input->post("verkaufspreis2"),
+      "verkaufspreis3" => $input->post("verkaufspreis3"),
       "www" => $input->post("www"),
     );
 
