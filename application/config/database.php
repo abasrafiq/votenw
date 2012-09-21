@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-if($_SERVER["HTTP_HOST"] == "localhost"){
+if($_SERVER["HTTP_HOST"] == "localhost" || $_SERVER["HTTP_HOST"] == "192.168.0.8"){
   $db['default']['hostname'] = 'localhost';
-  $db['default']['username'] = 'root';
-  $db['default']['password'] = 'ocimec!x08';
+  $db['default']['username'] = 'admin';
+  $db['default']['password'] = 'admin';
   $db['default']['database'] = 'dfpdf'; 
 }else{
   $db['default']['hostname'] = 'localhost';
