@@ -218,7 +218,7 @@ if($pdfErrorMessages){
     <?php
     //Feld
     //############################
-    $fieldName = "verkaufspreis";
+    $fieldName = "preis_gn101";
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
@@ -244,7 +244,7 @@ if($pdfErrorMessages){
     <?php
     //Feld
     //############################
-    $fieldName = "verkaufspreis2";
+    $fieldName = "preis_gt7";
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
@@ -271,7 +271,7 @@ if($pdfErrorMessages){
     <?php
     //Feld
     //############################
-    $fieldName = "verkaufspreis3";
+    $fieldName = "preis_gt101";
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,

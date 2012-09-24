@@ -40,6 +40,7 @@ Class Validationmodel extends CI_Model
   /* Validate User Form for PDF generation
   **/
   public function validateGenPdfForm($input){
+
     $this->postVars = Array(
       "ansprechpartner" => $input->post("ansprechpartner"),
       "nachname" => $input->post("nachname"),
@@ -50,9 +51,10 @@ Class Validationmodel extends CI_Model
       "ort" => $input->post("ort"),
       "email" => $input->post("email"),
       "telefon" => $input->post("telefon"),
-      "verkaufspreis" => $input->post("verkaufspreis"),
-      "verkaufspreis2" => $input->post("verkaufspreis2"),
-      "verkaufspreis3" => $input->post("verkaufspreis3"),
+      "preis_gt101" => $input->post("preis_gt101"),
+      "preis_gt7" => $input->post("preis_gt7"),
+      "preis_gn101" => $input->post("preis_gn101"),
+      "preis_gs3" => $input->post("preis_gs3"),
       "www" => $input->post("www"),
     );
 
@@ -85,10 +87,10 @@ Class Validationmodel extends CI_Model
       $this->isValid = FALSE;
       $this->validationErrors[] = "Bitte geben Sie Ihre Telefonnummer an";
     }
-
-    if($input->post("verkaufspreis") == ""){
+    
+    if($input->post("preis_gn101") == "" || $input->post("preis_gt7") == "" || $input->post("preis_gt101") == ""){
       $this->isValid = FALSE;
-      $this->validationErrors[] = "Bitte geben Sie Ihren gewünschten Verkaufspreis an";
+      $this->validationErrors[] = "Bitte geben Sie Ihre gewünschten Verkaufspreise an";
     }
 
     if($input->post("email") == "" || !valid_email($input->post("email"))){

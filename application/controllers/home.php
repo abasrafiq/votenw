@@ -124,6 +124,7 @@ class Home extends APP_Controller {
     $fontDir = dirname(__FILE__)."/../../fpdf_fonts/";
     //die($fontPath);
     define('FPDF_FONTPATH', $fontDir);
+    
 
     
     require_once("application/libraries/fpdf/cmykPdf.php");
@@ -132,9 +133,6 @@ class Home extends APP_Controller {
     $arTtmpPdfFileNames = Array(); //Alle erzeugten temporären PDF Dateien die wieder gelöscht werden
 
     $templates = $this->Pdfmodel->getData();
-
-
-
     
 
     //ZIP Datei erstellen
@@ -148,13 +146,12 @@ class Home extends APP_Controller {
 
     foreach($templates as $template){
 
-      $fpdi = new FPDI("L");
+      $fpdi = new FPDI("P", "mm", Array($template["pageWidth"], $template["pageHeight"] ));
 
 
       //globale PDF Einstellungen
-      $fpdi->AddFont('Arial', '', 'arial.php');;
-      $fpdi->SetFont('Arial','',8);
-      $fpdi->SetTextColor(100, 0, 0, 0);
+      $fpdi->AddFont('Arial', 'B', 'arial.php');;
+      
 
       $countTemplates ++;
 
@@ -164,10 +161,11 @@ class Home extends APP_Controller {
         die("Konnte Templatedatei nicht finden");
       }
 
-      //Set the source PDF file
-      $pagecount = $fpdi->setSourceFile($templateFileName);
+      //$pagecount = $fpdi->setSourceFile($templateFileName);
 
       $fpdi->AddPage();
+
+      $fpdi->setSourceFile($templateFileName);
 
       //Import the first page of the file
       $tpl = $fpdi->importPage(1);
@@ -175,23 +173,23 @@ class Home extends APP_Controller {
       //Use this page as template
       $fpdi->useTemplate($tpl);
 
-      
-      //START Einträge schreiben
-      //Firma
-      $fieldName = "firma";
-      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
-      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName)));
+      switch($template["filename"]){
+        case "Vorlage1.pdf":
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gs3");
+          break;
 
-      //Telefon
-      $fieldName = "telefon";
-      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
-      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName)));
+        case "Vorlage3.pdf":
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gn101");
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gt7");
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gt101");
+          break;
+      }
 
-      //Telefon
-      $fieldName = "verkaufspreis";
-      $fpdi->SetXY($template[$fieldName."_x"], $template[$fieldName."_y"]);
-      $fpdi->Write(0, utf8_decode($this->session->userdata($fieldName))." ".iconv("UTF-8", "CP1252", "€"));
+      //Infozeile
 
+      //Adresszeile
+
+      //Infozeile Footer
 
       /*
       * Output Options
@@ -225,6 +223,35 @@ class Home extends APP_Controller {
 
     $this->session->set_userdata($this->SESSIONKEY_GENERATED_DOWNLOAD_FILENAME , $tmpZipFileName);
 
+  }
+
+
+  private function writePriceFieldAndReturnFpdi($fpdi, $template, $priceFieldName){
+    //Preis
+    $fpdi->SetFont('Arial','B', $template["preis_fontSize"]);
+    $fpdi->SetTextColor(63, 53, 48, 20);
+    $textPrice = utf8_decode($this->session->userdata($priceFieldName));
+    $textWidthPrice = $fpdi->GetStringWidth($textPrice);
+    $fpdi->SetXY($template[$priceFieldName."_x"], $template[$priceFieldName."_y"]);
+    $fpdi->Cell($template["cellWidth"], 0, $textPrice."   ", 0, 2, "C"); 
+
+    //Preisprefix
+    $fpdi->SetFont('Arial','', $template["pricePostFix_fontSize"]);
+    $textPricePostFix = ".-".iconv("UTF-8", "CP1252", "€");;
+    $textWidthPricePostFix = $fpdi->GetStringWidth($textPricePostFix);
+    $pricePostFixX = $template[$priceFieldName."_x"] + ($template["cellWidth"] / 2) + ($textWidthPrice / 2) - $template["minusIndentPostfix"];
+    $fpdi->SetXY($pricePostFixX, $template[$priceFieldName."_y"] + 4); //TODO: flexible?
+    $fpdi->Write(0, $textPricePostFix);
+
+    //WKZ
+    $fpdi->SetFont('Arial','', $template["wkz_fontSize"]);
+    $textWkz = "wkz *";
+    $textWidthWkz = $fpdi->GetStringWidth($textWkz);
+    $wkzX = $template[$priceFieldName."_x"] + ($template["cellWidth"] / 2) + ($textWidthPrice / 2) + $textWidthPricePostFix - $textWidthWkz + 4 - $template["minusIndentPostfix"];
+    $fpdi->SetXY($wkzX, $template[$priceFieldName."_y"] - 9); //TODO: flexible?
+    $fpdi->Write(0, $textWkz);
+
+    return $fpdi;
   }
 
 
