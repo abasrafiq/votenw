@@ -35,10 +35,10 @@ $layout['templates'] = array(
     'empty' => array(
         '-YIELD-',
     ),
-    'lieferschein' => array(
-        'lieferschein_header',
+    'iframe' => array(
+        'iframe_header',
         '-YIELD-',
-        'lieferschein_footer'
+        'iframe_footer'
     )
 );
 

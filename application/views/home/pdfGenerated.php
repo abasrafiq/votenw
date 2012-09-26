@@ -8,7 +8,7 @@ if($error){
 ?>
   <p>Der Download Ihrer individuellen PDF-Dateien startet automatisch.</p>
   
-  <iframe src="<?= base_url(); ?>home/pdfDownload"></iframe>
+  <iframe id="iframeHiddenDownload" src="<?= base_url(); ?>home/pdfDownload"></iframe>
 <?
 }
 ?>

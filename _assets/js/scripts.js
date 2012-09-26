@@ -1,7 +1,8 @@
 $(function(){
 
   initUploads();
-
+  Shadowbox.init();
+  
 });
 
 function initUploads(){

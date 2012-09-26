@@ -211,7 +211,19 @@ if($pdfErrorMessages){
 <div class="container_50_50" id="containerVerkaufspreis">
 
   <div class="containerLeft">
-    <h2 class="h2Verkaufspreis">Preis / Galaxy Note 10.1</h2>
+    <h2>Ihre Verkaufspreise</h2>
+  </div>
+  <div class="containerRight">
+    <a id="previewLayout" rel="shadowbox[anzeigenlayout]" href="<?= base_url(); ?>_assets/images/anzeigenlayoutbilder/3-geraete.jpg" title="Vorschau Anzeigenlayout für 3 Geräte"><img src="<?= base_url(); ?>_assets/images/icon_preview.png" />Vorschau Anzeigenlayout</a>
+    <div class="hidden">
+      <a rel="shadowbox[anzeigenlayout]" href="<?= base_url(); ?>_assets/images/anzeigenlayoutbilder/2-geraete.jpg" title="Vorschau Anzeigenlayout für 2 Geräte"></a>
+      <a rel="shadowbox[anzeigenlayout]"  href="<?= base_url(); ?>_assets/images/anzeigenlayoutbilder/1-geraet.jpg" title="Vorschau Anzeigenlayout für 1 Gerät"></a>
+    </div>
+  </div>
+  
+
+  <div class="containerLeft">
+    <h2 class="h2Verkaufspreis">Samsung Galaxy Note 10.1</h2>
   </div>
   <div class="containerRight">
 
@@ -237,7 +249,7 @@ if($pdfErrorMessages){
 
   <!--- -->
   <div class="containerLeft">
-    <h2 class="h2Verkaufspreis">Preis / Galaxy Tab2 7.0</h2>
+    <h2 class="h2Verkaufspreis">Samsung Galaxy Tab2 7.0</h2>
   </div>
   <div class="containerRight">
 
@@ -264,7 +276,7 @@ if($pdfErrorMessages){
 
   <!--- -->
   <div class="containerLeft">
-    <h2 class="h2Verkaufspreis">Preis / Galaxy Tab2 10.1</h2>
+    <h2 class="h2Verkaufspreis">Samsung Galaxy Tab2 10.1</h2>
   </div>
   <div class="containerRight">
 
@@ -272,6 +284,32 @@ if($pdfErrorMessages){
     //Feld
     //############################
     $fieldName = "preis_gt101";
+    $data = array(
+      'name'        => $fieldName,
+      'id'          => $fieldName,
+      'value'       => $userData[$fieldName],
+      'maxlength'   => '100',
+      'class'       => 'verkaufspreis'
+    );
+    ?>
+    <div class="formRow">
+      <?php
+        echo form_input($data);
+      ?>
+      Euro inkl. Mwst.
+    </div>
+  </div>
+  
+  <!--- -->
+  <div class="containerLeft">
+    <h2 class="h2Verkaufspreis">Samsung Galaxy S3</h2>
+  </div>
+  <div class="containerRight">
+
+    <?php
+    //Feld
+    //############################
+    $fieldName = "preis_gs3";
     $data = array(
       'name'        => $fieldName,
       'id'          => $fieldName,
@@ -301,7 +339,7 @@ if($pdfErrorMessages){
   </div>
 
     <div class="frmRow" id="frmRowTeilnahmebedingungen">
-      <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a href="#">Teilnahmebedingungen</a>
+      <input type="checkbox" value="1" name="chkTeilnahmebedingungen" />&nbsp;Ich akzeptiere die <a rel="shadowbox;player=iframe" href="<?= base_url(); ?>/home/teilnahmebedingungen">Teilnahmebedingungen</a>
     </div>
 
   <div class="containerLeft">

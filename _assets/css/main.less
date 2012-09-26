@@ -73,6 +73,9 @@ h5{
 .block{
   display: block;
 }
+.hidden{
+  display: none;
+}
 .inline{
   display: inline;
 }
@@ -106,9 +109,6 @@ a{
 }
 .clear{
   clear: both;
-}
-iframe{
-  display: none;
 }
 .lightGray{
   color: @light-grey;
@@ -333,7 +333,7 @@ input[type="text"]{
   width: @wrapper-width;
   margin: 0 auto;
   background: black url(../images/wrapper_background.jpg) center top no-repeat;
-  height: 712px;
+  height: 770px;
   overflow: hidden;
 }
 #content{
@@ -383,20 +383,34 @@ input[type="text"]{
   float: left;
   width: 118px;
 }
+#dfpdf_form a#previewLayout{
+  color: black;
+  text-decoration: none;
+  line-height: 22px;
+  font-weight: bold;
+}
+#dfpdf_form a#previewLayout:hover{
+  text-decoration: underline;
+}
+#dfpdf_form a#previewLayout img{
+  padding-right: 5px;
+}
+#dfpdf_form #containerVerkaufspreis{
+  margin: 5px 0 5px 0;
+  border-top: 1px solid #dedede;
+  padding-top: 13px;
+}
 #dfpdf_form .h2Verkaufspreis{
   padding-top: 14px;
+  font-weight: normal;
 }
 #dfpdf_form input.verkaufspreis{
   width: 70px;
   margin: 10px 8px 0 0;
 }
-#dfpdf_form #containerVerkaufspreis{
-  margin: 5px 0 5px 0;
-  border-top: 1px solid #dedede;
-}
 #dfpdf_form #frmRowTeilnahmebedingungen{
   clear: both;
-  margin: 12px 0 12px 0;
+  margin: 121px 0 12px 0;
   padding: 10px 0 0px 3px;
 }
 #dfpdf_form #containerSubmitButtons{
@@ -423,8 +437,8 @@ input[type="text"]{
   height: 200px;
   overflow-y: scroll;
 }
-#containerUploads #price{
-  width: 26px;
+#containerUploads .price{
+  width: 38px;
 }
 #tblUploads td,
 #tblUploads select,
@@ -441,10 +455,11 @@ input[type="text"]{
   display: block;
   margin: 5px 0;
   position: absolute;
-  top: 641px;
+  top: 713px;
   left: @content-padding-left;
   display: block;
   width: 320px;
+  line-height: 13px;
 }
 #tblUploads td.uploadIcon{
   background: url(../images/icon_uploadEntry.gif) center 11px no-repeat;
@@ -466,7 +481,10 @@ input[type="text"]{
     padding-top: 4px;
 }
 
-
+/* Download */
+#iframeHiddenDownload{
+  display: none;
+}
 
 #flashMessages{
   position: fixed;
@@ -512,4 +530,24 @@ input[type="text"]{
 #containerLogin #btnLogin{
   float: left;
   margin: 0;
+}
+
+
+
+
+/* IFRAME */
+body.iframe{
+  background: white;
+  color: @font-color;
+  padding: 20px;
+}
+body.iframe #wrapperIframe{
+  
+}
+body.iframe #containerFooter{
+  width: auto;
+  margin: 0;
+}
+body.iframe #footer{
+  padding: 0;
 }

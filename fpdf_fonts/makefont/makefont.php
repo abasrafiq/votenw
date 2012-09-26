@@ -297,7 +297,7 @@ function CheckTTF($file)
 * patch:    optional patch for encoding                                        *
 * type:     font type if fontfile is empty                                     *
 *******************************************************************************/
-MakeFont("Arial.ttf", "arial.afm");
+MakeFont("samsungimaginationmodernregular.ttf", "samsungregular.afm");
 function MakeFont($fontfile, $afmfile, $enc='cp1252', $patch=array(), $type='TrueType')
 {
 	//Generate a font definition file

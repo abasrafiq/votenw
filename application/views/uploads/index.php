@@ -30,7 +30,7 @@
               $fieldName = "price";
               $data = array(
                 'name'        => $fieldName,
-                'id'          => $fieldName,
+                'class'          => $fieldName,
                 'value'       => $upload[$fieldName],
                 'maxlength'   => '100',
                 'rel'         => $upload["md5"]

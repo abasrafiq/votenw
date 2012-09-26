@@ -16,6 +16,7 @@
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/jquery.noty.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/layouts/top.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/noty/themes/df.js"></script> 
+    <script type="text/javascript" src="<?= base_url() ?>_assets/js/shadowbox/shadowbox.js"></script> 
     <script type="text/javascript" src="<?= base_url() ?>_assets/js/scripts.js"></script> 
   </body>
 </html>

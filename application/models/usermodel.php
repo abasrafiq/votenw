@@ -5,12 +5,12 @@ if (!defined('BASEPATH'))
 Class Usermodel extends CI_Model{
 
   function login($code){
-   $this -> db -> select('*');
-   $this -> db -> from('pdf_users');
-   $this -> db -> where('code = ' . "'" . $code . "'");
-   $this -> db -> limit(1);
+   $this->db->select('*');
+   $this->db->from('pdf_users');
+   $this->db->where('code = ' . "'" . $code . "'");
+   $this->db->limit(1);
 
-   $query = $this -> db -> get();
+   $query = $this->db->get();
 
    if($query -> num_rows() == 1)
    {
@@ -24,13 +24,13 @@ Class Usermodel extends CI_Model{
 
   //Gibt alle Benutzerdaten aus der Datenbank zurück oder FALSE wenn Benutzer via Code nicht gefunden
   public function getUserdata($id){
-    $this -> db -> select('*');
-    $this -> db -> from('pdf_users');
-    $this -> db -> where('id = ' . "'" . $id . "'");
-    $this -> db -> limit(1);
+    $this->db->select('*');
+    $this->db->from('pdf_users');
+    $this->db->where('id = ' . "'" . $id . "'");
+    $this->db->limit(1);
 
-    $query = $this -> db -> get();
-    if($query -> num_rows() == 1){
+    $query = $this->db->get();
+    if($query->num_rows() == 1){
       $arReturn = Array();
       $result = $query->result_array();
 
@@ -78,4 +78,3 @@ Class Usermodel extends CI_Model{
 
 
 }
-

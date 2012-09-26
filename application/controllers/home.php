@@ -70,6 +70,10 @@ class Home extends APP_Controller {
     
   }
 
+  public function teilnahmebedingungen(){
+    $this->layout->template("iframe");
+    $this->layout->show('/home/teilnahmebedingungen', $this->data);  
+  }
 
 
   /** 
@@ -120,20 +124,24 @@ class Home extends APP_Controller {
   */
   private function generateDownload(){
 
+    require_once("application/libraries/fpdf/cmykPdf.php");
+    require_once("application/libraries/fpdi/fpdi.php");
+    $this->load->model("Pdfmodel");
+
     $countTemplates = 0;
     $fontDir = dirname(__FILE__)."/../../fpdf_fonts/";
     //die($fontPath);
     define('FPDF_FONTPATH', $fontDir);
     
-
+    //Adresse
+    $textAdresse = $this->session->userdata("firma");
+    $textAdresse.= ", ".$this->session->userdata("strasse");
+    $textAdresse.= ", ".$this->session->userdata("plz");
+    $textAdresse.= " ".$this->session->userdata("ort");
     
-    require_once("application/libraries/fpdf/cmykPdf.php");
-    require_once("application/libraries/fpdi/fpdi.php");
-    $this->load->model("Pdfmodel");
     $arTtmpPdfFileNames = Array(); //Alle erzeugten temporären PDF Dateien die wieder gelöscht werden
 
     $templates = $this->Pdfmodel->getData();
-    
 
     //ZIP Datei erstellen
     $tmpZipFileName = "tmp/".md5(time()).".zip";
@@ -142,6 +150,7 @@ class Home extends APP_Controller {
     if ($zipResource == FALSE){
       die("Konnte zip-Download nicht erzeugen");
     }
+    
 
 
     foreach($templates as $template){
@@ -150,7 +159,10 @@ class Home extends APP_Controller {
 
 
       //globale PDF Einstellungen
-      $fpdi->AddFont('Arial', 'B', 'arial.php');;
+      $fpdi->AddFont('Arial', '', 'arial.php');
+      $fpdi->AddFont('samsungimaginationmodernxbold', '', 'samsungimaginationmodernxbold.php');
+      $fpdi->AddFont('samsungregular', '', 'samsungregular.php');
+
       
 
       $countTemplates ++;
@@ -178,6 +190,11 @@ class Home extends APP_Controller {
           $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gs3");
           break;
 
+        case "Vorlage2.pdf":
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gs3");
+          $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gn101");
+          break;
+
         case "Vorlage3.pdf":
           $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gn101");
           $fpdi = $this->writePriceFieldAndReturnFpdi($fpdi, $template, "preis_gt7");
@@ -185,11 +202,37 @@ class Home extends APP_Controller {
           break;
       }
 
+
+      
+
       //Infozeile
+      $fpdi->SetFont('samsungregular','', $template["info_fontSize"]);
+      $fpdi->SetTextColor(0, 0, 0, 100);
+      $textInfoline = "*Angebot gilt solange der Vorrat reicht und nur bei ";
+      $textInfoline.= $textAdresse;
+      $textInfoline.= "! Tippfehler und Irrtürmer vorbehalten!";
+      $textInfoline = utf8_decode($textInfoline);
+      $fpdi->SetXY(0, 733);
+      $fpdi->Cell($template["pageWidth"], 0, $textInfoline."   ", 0, 2, "C"); 
+
 
       //Adresszeile
+      $fpdi->SetFont('samsungimaginationmodernxbold','', $template["adress_fontSize"]);
+      $fpdi->SetTextColor(0, 0, 0, 100);
+      $fpdi->SetXY(0, 802);
+      $fpdi->Cell($template["pageWidth"], 0, utf8_decode($textAdresse)."   ", 0, 2, "C"); 
+
 
       //Infozeile Footer
+      /*
+      $fpdi->SetFont('samsungregular','', $template["info_footer_fontSize"]);
+      $fpdi->SetTextColor(0, 0, 0, 100);
+      $textInfolineFooter = "Der Werbezeitraum ist bis 10. November 2012 festgelegt. Die WKZ-Ausschüttung erfolgt nach Einreichung eines Werbebelegs für mind. eines der aufgeführten Samsung Tablets im gültigen Werbezeitraum.";
+      $textInfolineFooter = utf8_decode($textInfolineFooter);
+      $fpdi->SetXY(0, 811);
+      $fpdi->Cell($template["pageWidth"], 0, $textInfolineFooter."   ", 0, 2, "C"); 
+      */
+
 
       /*
       * Output Options
@@ -198,7 +241,7 @@ class Home extends APP_Controller {
       * F: save to a local file with the name given by name (may include a path).
       * S: return the document as a string. name is ignored.
       */
-      $tmpPdfFileName = "tmp/Template_".$countTemplates."_".$this->userdata["id"].".pdf";
+      $tmpPdfFileName = "tmp/Anzeige_".$countTemplates."_".$this->userdata["id"].".pdf";
       //erzeugte temporäre Datei Ablegen, wird später gelöscht
       $arTtmpPdfFileNames[] = $tmpPdfFileName;
       $fpdi->Output($tmpPdfFileName, "F");
@@ -228,7 +271,7 @@ class Home extends APP_Controller {
 
   private function writePriceFieldAndReturnFpdi($fpdi, $template, $priceFieldName){
     //Preis
-    $fpdi->SetFont('Arial','B', $template["preis_fontSize"]);
+    $fpdi->SetFont('samsungimaginationmodernxbold','', $template["preis_fontSize"]);
     $fpdi->SetTextColor(63, 53, 48, 20);
     $textPrice = utf8_decode($this->session->userdata($priceFieldName));
     $textWidthPrice = $fpdi->GetStringWidth($textPrice);
@@ -236,19 +279,19 @@ class Home extends APP_Controller {
     $fpdi->Cell($template["cellWidth"], 0, $textPrice."   ", 0, 2, "C"); 
 
     //Preisprefix
-    $fpdi->SetFont('Arial','', $template["pricePostFix_fontSize"]);
+    $fpdi->SetFont('samsungregular','', $template["pricePostFix_fontSize"]);
     $textPricePostFix = ".-".iconv("UTF-8", "CP1252", "€");;
     $textWidthPricePostFix = $fpdi->GetStringWidth($textPricePostFix);
     $pricePostFixX = $template[$priceFieldName."_x"] + ($template["cellWidth"] / 2) + ($textWidthPrice / 2) - $template["minusIndentPostfix"];
-    $fpdi->SetXY($pricePostFixX, $template[$priceFieldName."_y"] + 4); //TODO: flexible?
+    $fpdi->SetXY($pricePostFixX, $template[$priceFieldName."_y"] + 4); //TODO: flexible Y?
     $fpdi->Write(0, $textPricePostFix);
 
     //WKZ
-    $fpdi->SetFont('Arial','', $template["wkz_fontSize"]);
+    $fpdi->SetFont('samsungregular','', $template["wkz_fontSize"]);
     $textWkz = "wkz *";
     $textWidthWkz = $fpdi->GetStringWidth($textWkz);
     $wkzX = $template[$priceFieldName."_x"] + ($template["cellWidth"] / 2) + ($textWidthPrice / 2) + $textWidthPricePostFix - $textWidthWkz + 4 - $template["minusIndentPostfix"];
-    $fpdi->SetXY($wkzX, $template[$priceFieldName."_y"] - 9); //TODO: flexible?
+    $fpdi->SetXY($wkzX, $template[$priceFieldName."_y"] - 9); //TODO: flexible Y?
     $fpdi->Write(0, $textWkz);
 
     return $fpdi;
