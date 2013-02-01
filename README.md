@@ -1,4 +1,4 @@
 votenw
 ======
 
-voting system based on codeigniter 2
+voting system based on codeigniter 2.x
