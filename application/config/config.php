@@ -1,26 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 /*
 |--------------------------------------------------------------------------
-| Base Site URL
+| Allgemeine Konfiguration
 |--------------------------------------------------------------------------
-|
-| URL to your CodeIgniter root. Typically this will be your base URL,
-| WITH a trailing slash:
-|
-|	http://example.com/
-|
-| If this is not set then CodeIgniter will guess the protocol, domain and
-| path to your installation.
-|
 */
 $config['base_url']	= "";
-$config['pageTitle'] = 'Samsung Tabanzeigen';
-if($_SERVER["HTTP_HOST"] == "localhost"){
-  $config['baseServerPath'] = $_SERVER['DOCUMENT_ROOT']."/dfpdf/";
-}else{
-  $config['baseServerPath'] = $_SERVER['DOCUMENT_ROOT']."/";
-}
+$config['pageTitle'] = 'vote for nerd words';
+
+
 
 
 

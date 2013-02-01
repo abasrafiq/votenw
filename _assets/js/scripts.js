@@ -1,79 +1,145 @@
-$(function(){
-
-  initUploads();
-  Shadowbox.init();
+Sammy(function() {
   
+  this.get('#:slug', function() {
+    slug = this.params.slug;
+    showQuestion(slug);
+  });
+
+  this.get('', function() {
+  });
+
+
+ 
+}).run();
+
+
+
+$(function() {
+    initVoting();
+
+    initAlsResponsive();
+
+    initPieChart();
+
 });
 
-function initUploads(){
 
-  //beim Verlassen des Feldes Update in der Datenbank
-  $("#tblUploads select").each(function(){
-    $(this).on("change", function(){
-      var uploadID = $(this).attr("rel");
-      updateUploadEntry("t", $(this).val(), uploadID);
-    });
+function initPieChart(){
+  
+}
+
+
+function initAlsResponsive(){
+  $(window).resize(function(){
+    $(".als-viewport, .als-wrapper").css( {"width": "100%"} );
   });
+}
 
-  //beim Verlassen des Feldes Update in der Datenbank
-  $("#tblUploads td.price input").each(function(){
-    $(this).on("change", function(){
-      var uploadID = $(this).attr("rel");
-      updateUploadEntry("p", $(this).val(), uploadID);
-    });
-  });
+function initVoting(){
 
-  //Icon normal/delete bei hover austauschen
-  $("#tblUploads td.uploadIcon").hover(
-    function () {
-      $(this).toggleClass("hover");
-    }
-  );
+  initVoteButton();
 
-  //Klick auf img löscht den Eintrag
-  $("#tblUploads td.uploadIcon img").each(function(){
-    
-    $(this).on("click", function(){
-      if(confirm("Möchten Sie diesen Upload wirklich löschen")){
-        var uploadID = $(this).attr("rel");
-        deleteUploadEntry(uploadID);
-      }
-    });
-
-  });
+  initRandomQuestionSlider();
 
 }
 
-function deleteUploadEntry(uploadID){
 
-  //TODO: confirm
+function showQuestion(slug){
+  $("#questionInner").fadeOut("fast", function(){
 
+    $.ajax({
+      type: "POST",
+      url: baseUrl + "questions/ajaxShow/" + slug + "/0/1"
+    }).success(function( data ) {
+      $("#containerQuestion").html(data);
+      $("#questionInner").fadeIn();
+
+      $('.chart').easyPieChart({
+        //your configuration goes here
+      });
+
+      initVoteButton();
+      updateRandomContainer();
+
+    });
+
+  });
+}
+
+
+function initRandomQuestionSlider(){
+
+  $(".randomQuestionWrapper").als({
+    visible_items: 4,
+    scrolling_items: 1,
+    orientation: "vertical",
+    circular: "yes",
+    autoscroll: "no"
+  });
+}
+
+function updateRandomContainer(){
+  var slug = $("#slug").val();
+  $("#containerRandomQuestions").load(baseUrl + "questions/showRandomContainer/" + slug, function(){
+    initRandomQuestionSlider();
+  });
+}
+
+
+function showVotingResults(slug){
   $.ajax({
     type: "POST",
-    url: baseUrl + "upload/delete",
-    dataType: 'json',
-    data: "uploadID=" + uploadID
-  }).done(function( data ) {
+    url: baseUrl + "questions/show/" + slug + "/1/1"
+  }).success(function( data ) {
+    $("#containerQuestion").html(data);
+    $("#questionInner").fadeIn();
 
-      if(data.error === false){
-        userMessage(data);
-        $("#uploadRow_" + uploadID).fadeOut();
+    $('.chart').easyPieChart({
+      //your configuration goes here
+    });
+    updateRandomContainer();
+
+  });
+}
+
+
+function initVoteButton(){
+  $(".voteRow .button").each(function(){
+
+    $(this).on("click", function(e){
+
+      e.preventDefault();
+
+      var voteId = $(this).val();
+      var qid = $('#qid').val();
+
+      if(!voteId || voteId === undefined){
+        var data = {};
+        data.message = "Bitte Eine Antwort auswählen.";
+        data.messageCssClass = "error";
+        self.userMessage(data);
       }else{
-        alert("Beim Löschen ist ein Fehler aufgetreten.");
+        $.ajax({
+          type: "POST",
+          url: baseUrl + "questions/saveQuestion",
+          data: { voteId: voteId, qid: qid },
+          dataType: "json"
+        }).success(function( data ) {
+          
+          if(!self.isAjaxResponseError(data)){
+            self.userMessage(data);
+            
+            $("#questionInner").fadeOut("fast", function(){
+              showVotingResults($("#slug").val());
+            });
+            
+          }else{
+          }
+        });
+
       }
+    });
 
-  });
-}
-
-function updateUploadEntry(field, value, uploadID){
-  $.ajax({
-    type: "POST",
-    url: baseUrl + "upload/update",
-    dataType: 'json',
-    data: "field=" + field + "&value=" + value + "&uploadID=" + uploadID
-  }).done(function( data ) {
-      //self.cartLoading.hide();
-      userMessage(data);
   });
 }
 
@@ -82,40 +148,27 @@ function isAjaxResponseError(data){
   var self = this;
 
   if(data.error){
-    //self.cartLoading.hide();
+    self.userMessage(data);
     return true;
   }
+
   return false;
 }
 
-
-
-function userMessage (data){
-
-  if(data.message === "" || data.message === undefined){
-    return;
-  }
-  
-  var messageContainer = $("#MessagesContainer");
-  //messageContainer.removeClass().addClass(data.messageCssClass);
-  //messageContainer.find("div").stop().remove();
-  //var messageEl = messageContainer.prepend("<div></div>").hide().html(data.message);
-  //messageEl.fadeIn("fast").delay(2000).fadeOut(5000);
+// Kurze Flash-Message an den Benutzer
+function userMessage(data){
+  var messageContainer = $("#messagesContainer");
   
   notyType = data.messageCssClass;
-  if(notyType === "" || notyType === undefined){
+  if(notyType === ""){
     notyType = "success";
   }
   
-  //alert(data.message);
-  
   noty({
-    theme: 'df',
     text: data.message,
     dismissQueue: true,
     timeout: 1500,
     type: notyType
 
   });
-  
 }

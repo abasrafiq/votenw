@@ -1,0 +1,94 @@
+/* ANY LIST SLIDER */
+/*************************************
+ * generic styling for ALS elements
+ ************************************/
+
+.als-container {
+  position: relative;
+  width: 100%;
+  margin: 0px auto;
+  z-index: 0;
+}
+
+.als-viewport {
+  position: relative;
+  overflow: hidden;
+  margin: 0px auto;
+}
+
+.als-wrapper {
+  position: relative;
+  list-style: none;
+}
+
+.als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+}
+
+.als-prev, .als-next {
+  position: absolute;
+  cursor: pointer;
+  clear: both;
+}
+
+
+
+/*************************************
+ * specific for vertical
+ ************************************/
+
+.randomQuestionWrapper {
+
+
+  .als-item {
+    width: 100%;
+    float: none;
+    margin: 0;
+    padding: 4px 0px;
+    text-align: center;
+    display: block;
+    background: blue;
+    color: white;
+    margin-bottom: 1px;
+    
+    a{
+      display: block;
+    }
+
+    &.alreadyVoted{
+        background: red;
+        
+        a{
+          color: white;
+        }
+    }
+
+    
+
+  }
+
+  .als-prev,
+  .als-next{
+    position: static;
+    display: block;
+
+    img{
+      display: block;
+      margin: 0 auto;
+    }
+
+  }
+
+  .als-prev {
+    margin-bottom: 0.5em;
+  }
+
+  .als-next {
+    margin-top: 0.5em;
+  }
+
+}

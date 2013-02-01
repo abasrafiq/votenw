@@ -1,5 +1,5 @@
 /**
-* noty - jQuery Notification Plugin v2.0.3
+* noty - jQuery Notification Plugin v2.0.1
 * Contributors: https://github.com/needim/noty/graphs/contributors
 *
 * Examples and Documentation - http://needim.github.com/noty/
@@ -169,6 +169,8 @@ if (typeof Object.create !== 'function') {
 
 					delete $.noty.store[self.options.id]; // deleting noty from store
 
+					self.options.theme.callback.onClose.apply(self);
+
 					if (!self.options.dismissQueue) {
 						// Queue render
 						$.noty.ontap = true;
@@ -281,8 +283,10 @@ if (typeof Object.create !== 'function') {
 
 	// This is for custom container
 	$.fn.noty = function(options) {
-		options.custom = $(this);
-		return $.notyRenderer.init(options);
+		return this.each(function() {
+			options.custom = $(this);
+			return $.notyRenderer.init(options);
+		});
 	};
 	 
 	$.noty = {};
@@ -387,7 +391,7 @@ function noty(options) {
 		'onClosed': 'callback.afterClose'
 	}
 
-	jQuery.each(options, function(key, value) {
+	$.each(options, function(key, value) {
 		if (old_to_new[key]) {
 			using_old++;
 			var _new = old_to_new[key].split('.');
@@ -400,7 +404,7 @@ function noty(options) {
 	});
 
 	if (!options.closeWith) {
-		options.closeWith = jQuery.noty.defaults.closeWith;
+		options.closeWith = $.noty.defaults.closeWith;
 	}
 
 	if (options.hasOwnProperty('closeButton')) {
@@ -448,7 +452,7 @@ function noty(options) {
 	}
 
 	if (options.buttons) {
-		jQuery.each(options.buttons, function(i, button) {
+		$.each(options.buttons, function(i, button) {
 			if (button.click) {
 				using_old++;
 				button.onClick = button.click;

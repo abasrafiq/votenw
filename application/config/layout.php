@@ -33,12 +33,7 @@ $layout['templates'] = array(
         'footer'
     ),
     'empty' => array(
-        '-YIELD-',
-    ),
-    'iframe' => array(
-        'iframe_header',
-        '-YIELD-',
-        'iframe_footer'
+        '-YIELD-'
     )
 );
 

@@ -1,0 +1,126 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700'");
+
+// Your custom settings file to override Foundation defaults
+@import "settings";
+
+// Comment out this import if you are customizing you imports below
+@import "foundation";
+
+@import "als";
+@import "jquery.easy-pie-chart";
+
+body{
+  font-family: "Helvetica Neue", Arial;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+{
+  font-family: 'Open Sans Condensed', Arial;
+}
+
+#containerQuestion{
+  overflow-x: hidden;
+  min-height: 28.571em;
+}
+
+
+/* QUESTION NAV */
+.questionNav{
+
+  a{
+    display: block;
+  }
+
+  .questionNavNextQuestion{
+    text-align: right;
+  }
+}
+
+
+
+/* VOTE FORM */
+.voteRow{
+  text-align: center;
+
+  .button.large{
+    font-size: 2em;
+    width: 7.143em;
+    margin: 0 auto 0.714em auto;
+  }
+
+}
+label{
+  display: inline;
+  padding-left: 5px;
+}
+
+
+/* PIE CHART */
+.pieChartContainer{
+  width: 33%!important;
+  float: left;
+
+  .easyPieChart{
+    max-width: 100%;
+    margin: 0 auto;
+
+  }
+
+  .pieChartLabel{
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+  }
+
+}
+
+// ----------------------------------------
+// Import specific parts of Foundation by commenting the import "foundation"
+// and uncommenting what you want below. You must uncomment the following if customizing
+
+// @import "compass/css3";
+// @import "foundation/settings";
+// @import "foundation/functions/all";
+
+// Control which mixins you have access too
+
+// @import "foundation/mixins/clearfix";
+// @import "foundation/mixins/css-triangle";
+// @import "foundation/mixins/font-size";
+
+// Must include next two for semantic grid to work
+
+// @import "foundation/mixins/respond-to";
+// @import "foundation/mixins/semantic-grid";
+
+// @import "modular-scale";
+// @import "foundation/common/globals";
+
+// Must include the grid for any responsiveness
+
+// @import "foundation/components/grid";
+
+// Control which common styles get compiled
+
+// @import "foundation/common/typography";
+// @import "foundation/common/forms";
+
+// Control which components you get if customizing
+
+// @import "foundation/components/modules/buttons";
+// @import "foundation/components/modules/tabs";
+// @import "foundation/components/modules/ui";
+// @import "foundation/components/modules/topbar";
+// @import "foundation/components/modules/navbar";
+// @import "foundation/components/modules/orbit";
+// @import "foundation/components/modules/reveal";
+// @import "foundation/components/modules/offcanvas";
+// @import "foundation/components/modules/clearing";
+// @import "foundation/components/modules/joyride";
+
+// Media Queries Overrides
+// @import "foundation/components/modules/mqueries";

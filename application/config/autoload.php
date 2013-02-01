@@ -29,7 +29,7 @@
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Packges
+|  Auto-load Packages
 | -------------------------------------------------------------------
 | Prototype:
 |
@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array("session", "Layout", "database", "unit_test", "form_validation");
+$autoload['libraries'] = array("session", "layout", "email", "database");
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array("session", "Layout", "database", "unit_test", "fo
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array("url", "form", "html2pdf", "output", "xml", "email");
+$autoload['helper'] = array("output", "url", "email");
 
 
 /*

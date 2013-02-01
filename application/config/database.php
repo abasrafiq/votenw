@@ -52,12 +52,12 @@ if($_SERVER["HTTP_HOST"] == "localhost" || $_SERVER["HTTP_HOST"] == "192.168.0.8
   $db['default']['hostname'] = 'localhost';
   $db['default']['username'] = 'admin';
   $db['default']['password'] = 'admin';
-  $db['default']['database'] = 'dfpdf'; 
+  $db['default']['database'] = 'votenw'; 
 }else{
   $db['default']['hostname'] = 'localhost';
-  $db['default']['username'] = 'smm_admin';
-  $db['default']['password'] = 'sfyQ5NcjxyS3mqNC';
-  $db['default']['database'] = 'samsung_mobile_mail';
+  $db['default']['username'] = '';
+  $db['default']['password'] = '';
+  $db['default']['database'] = '';
 }
 
 $db['default']['dbdriver'] = 'mysql';
