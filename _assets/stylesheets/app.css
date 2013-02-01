@@ -6088,15 +6088,15 @@ table.hide-for-medium {
   width: 100%;
   float: none;
   margin: 0;
-  padding: 8px 0px;
   background: #129324;
   text-align: center;
   display: block;
   color: white;
   margin-bottom: 1px;
 }
-/* line 61, ../sass/_als.scss */
+/* line 60, ../sass/_als.scss */
 .randomQuestionWrapper .als-viewport .als-item a {
+  padding: 8px 0px;
   display: block;
   color: white;
   font-weight: 700;
@@ -6239,35 +6239,52 @@ header #headerInner h1 a {
   font-size: 1.857em;
   width: 7.143em;
   margin: 0 auto 0.714em auto;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* PIE CHART */
-/* line 119, ../sass/app.scss */
-.pieChartContainer {
+/* line 120, ../sass/app.scss */
+#chartWrapper {
+  margin-bottom: 1.5em;
+}
+/* line 124, ../sass/app.scss */
+#chartWrapper .pieChartContainer {
   width: 33%!important;
   float: left;
 }
-/* line 123, ../sass/app.scss */
-.pieChartContainer .easyPieChart {
+/* line 128, ../sass/app.scss */
+#chartWrapper .pieChartContainer .easyPieChart {
   max-width: 100%;
   margin: 0 auto;
 }
-/* line 127, ../sass/app.scss */
-.pieChartContainer .easyPieChart span {
+/* line 133, ../sass/app.scss */
+#chartWrapper .pieChartContainer .easyPieChart span {
   font-family: "Open Sans Condensed";
   font-size: 1.5em;
   font-weight: 700;
 }
-/* line 135, ../sass/app.scss */
-.pieChartContainer .pieChartLabel {
+/* line 142, ../sass/app.scss */
+#chartWrapper .pieChartContainer .pieChartLabel {
   text-align: center;
-  font-weight: 400;
-  font-size: 1.2em;
-  margin-bottom: 0.3em;
+  font-weight: 700;
+  font-size: 1.143em;
+  margin-top: 0.5em;
+}
+
+/* line 152, ../sass/app.scss */
+.alreadyVoted {
+  color: #a5a5a5;
+  text-align: center;
+}
+/* line 156, ../sass/app.scss */
+.alreadyVoted span {
+  font-weight: 700;
 }
 
 /* RANDOM QUESTION SIDEBAR */
-/* line 146, ../sass/app.scss */
+/* line 164, ../sass/app.scss */
 #containerRandomQuestions {
   min-height: 30em;
   background: #E0C89B;

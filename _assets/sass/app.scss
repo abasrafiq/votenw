@@ -75,9 +75,9 @@ header{
 
   .questionDescription{
     margin-top: 0;
-   text-align: center;
-   font-size: 1.5em; 
-   color: #a5a5a5;
+     text-align: center;
+     font-size: 1.5em; 
+     color: $lightGray;
   }
 
   #questionInner{
@@ -110,33 +110,51 @@ header{
     font-size: 1.857em;
     width: 7.143em;
     margin: 0 auto 0.714em auto;
+    @include single-box-shadow(rgba(0,0,0,0.2), 0, 5px, 10px, 0);
   }
 
 }
 
 
 /* PIE CHART */
-.pieChartContainer{
-  width: 33%!important;
-  float: left;
+#chartWrapper{
 
-  .easyPieChart{
-    max-width: 100%;
-    margin: 0 auto;
+  margin-bottom: 1.5em;
 
-    span{
-      font-family: $mainFont;
-      font-size: 1.5em;
+  .pieChartContainer{
+    width: 33%!important;
+    float: left;
+
+    .easyPieChart{
+      max-width: 100%;
+      margin: 0 auto;
+
+      span
+      {
+        font-family: $mainFont;
+        font-size: 1.5em;
+        font-weight: 700;
+      }
+
+    }
+
+
+    .pieChartLabel{
+      text-align: center;
       font-weight: 700;
+      font-size: 1.143em;
+      margin-top: 0.5em;
     }
 
   }
+}
 
-  .pieChartLabel{
-    text-align: center;
-    font-weight: 400;
-    font-size: 1.2em;
-    margin-bottom: 0.3em;
+.alreadyVoted{
+  color: $lightGray;
+  text-align: center;
+
+  span{
+    font-weight: 700;
   }
 
 }

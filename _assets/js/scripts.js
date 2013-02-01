@@ -54,18 +54,29 @@ function showQuestion(slug){
       $("#containerQuestion").html(data);
       $("#questionInner").fadeIn();
 
-      $('.chart').easyPieChart({
-        //your configuration goes here
-      });
+      
 
       initVoteButton();
       updateRandomContainer();
+      updatePieChart();
 
     });
 
   });
 }
 
+
+function updatePieChart(){
+  $('.chart').easyPieChart({
+    barColor: "#DB5600",
+    scaleColor: "#bbb",
+    trackColor: "#bbb",
+    lineWidth: 10,
+    size: $(".pieChartContainer").width()/1.1,
+    animate: 2000,
+    lineCap: "square"
+  });
+}
 
 function initRandomQuestionSlider(){
 
@@ -94,9 +105,7 @@ function showVotingResults(slug){
     $("#containerQuestion").html(data);
     $("#questionInner").fadeIn();
 
-    $('.chart').easyPieChart({
-      //your configuration goes here
-    });
+    updatePieChart();
     updateRandomContainer();
 
   });
