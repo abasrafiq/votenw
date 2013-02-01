@@ -31,7 +31,7 @@
     
     
     
-    <div class="row">
+    <div id="chartWrapper"class="row">
     
         <?
           foreach($questionData["votes"]["votes"] as $vote){
@@ -67,7 +67,7 @@
       <div id="votedText" class="row">
         <div class="twelve columns">
           <? if($questionData["userVoted"]["alreadyVoted"] === true){ ?>
-            <p class="alreadyVoted">Sie haben mit <span><?= $questionData["userVoted"]["answer"]["title"]; ?></span> abgestimmt</p>
+            <p class="alreadyVoted">Sie haben für <span><?= $questionData["userVoted"]["answer"]["title"]; ?> <?= $questionData["title"]; ?></span> abgestimmt</p>
           <? } ?>
         </div>
       </div>
