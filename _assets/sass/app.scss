@@ -12,33 +12,94 @@
 body{
   font-family: "Helvetica Neue", Arial;
   font-weight: 300;
+  background: #3D3527;
 }
 
 h1,
 h2,
 h3,
 {
-  font-family: 'Open Sans Condensed', Arial;
+  font-family: $mainFont, Arial;
 }
 
+h1{
+  font-size: 2em;
+}
+
+a{
+  color: $orange;
+}
+
+/* HEADER */
+header{
+
+  #headerInner{
+    margin: 0.714em 0;
+    background: $orange;
+
+    h1{
+
+      a{
+        color: white;
+        display:block;
+      }
+
+    }
+
+  }
+
+}
+
+/* QUESTION */
 #containerQuestion{
+  min-height: $containerMinHeight;
   overflow-x: hidden;
-  min-height: 28.571em;
-}
+  background: #F2E8D5;
 
+  .questionTitle{
 
-/* QUESTION NAV */
-.questionNav{
+    text-align: center;
+    margin: 0.5em;
 
-  a{
-    display: block;
+    span{
+      font-size: 1.286em;
+      padding: 0 0.357em;
+      color: white;
+      background: #1387E8;
+
+      @include border-radius(10px, 10px);
+      @include single-box-shadow(rgba(0,0,0,0.2), 0, 5px, 10px, 0);
+    }
+
   }
 
-  .questionNavNextQuestion{
-    text-align: right;
+  .questionDescription{
+    margin-top: 0;
+   text-align: center;
+   font-size: 1.5em; 
+   color: #a5a5a5;
   }
-}
 
+  #questionInner{
+
+    /* QUESTION NAV */
+    .questionNav{
+
+      margin-bottom: 1em;
+
+      a{
+        display: block;
+        font-weight: 700;
+      }
+
+      .questionNavNextQuestion{
+        text-align: right;
+      }
+    }
+
+  }
+
+}
 
 
 /* VOTE FORM */
@@ -46,15 +107,11 @@ h3,
   text-align: center;
 
   .button.large{
-    font-size: 2em;
+    font-size: 1.857em;
     width: 7.143em;
     margin: 0 auto 0.714em auto;
   }
 
-}
-label{
-  display: inline;
-  padding-left: 5px;
 }
 
 
@@ -67,6 +124,12 @@ label{
     max-width: 100%;
     margin: 0 auto;
 
+    span{
+      font-family: $mainFont;
+      font-size: 1.5em;
+      font-weight: 700;
+    }
+
   }
 
   .pieChartLabel{
@@ -76,6 +139,14 @@ label{
     margin-bottom: 0.3em;
   }
 
+}
+
+
+/* RANDOM QUESTION SIDEBAR */
+#containerRandomQuestions{
+  min-height: $containerMinHeight;
+  background: #E0C89B;
+  
 }
 
 // ----------------------------------------

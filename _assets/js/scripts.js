@@ -70,7 +70,7 @@ function showQuestion(slug){
 function initRandomQuestionSlider(){
 
   $(".randomQuestionWrapper").als({
-    visible_items: 4,
+    visible_items: 6,
     scrolling_items: 1,
     orientation: "vertical",
     circular: "yes",

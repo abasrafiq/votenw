@@ -2,14 +2,19 @@
 
   <div class="containerVotes">
 
-    <h2 class="questionTitle"><?= $questionData["title"]; ?></h1>
-    <h3 class="questionDescription"><?= $questionData["description"]; ?></h2>
+    <h2 class="questionTitle">
+      <span>
+        <?= $questionData["title"]; ?>
+      </span>
+    </h2>
+    
+    <h3 class="questionDescription">( <?= $questionData["description"]; ?> )</h3>
     
     <div class="row questionNav">
       <div class="six mobile-two columns questionNavPreviousQuestion">
         <? 
         if($previousQuestion){
-          echo anchor("questions/show/#".$previousQuestion["slug"], "Vorherige Frage", Array("id" => "linkPreviousQuestion", "class" => "linkToQuestion questionNavigation", "rel" => $previousQuestion["slug"]));
+          echo anchor("questions/show/#".$previousQuestion["slug"], "&lt;&lt; Vorherige Frage", Array("id" => "linkPreviousQuestion", "class" => "linkToQuestion questionNavigation", "rel" => $previousQuestion["slug"]));
         }
         ?>
       </div>
@@ -17,14 +22,15 @@
       <div class="six mobile-two columns questionNavNextQuestion">
       <? 
       if($nextQuestion){
-        echo anchor("questions/show/#".$nextQuestion["slug"], "Nächste Frage", Array("id" => "linkNextQuestion", "class" => "linkToQuestion questionNavigation", "rel" => $nextQuestion["slug"]));
+        echo anchor("questions/show/#".$nextQuestion["slug"], "Nächste Frage &gt;&gt;", Array("id" => "linkNextQuestion", "class" => "linkToQuestion questionNavigation", "rel" => $nextQuestion["slug"]));
       }
       ?>
       </div>
       
     </div>
-
-  
+    
+    
+    
     <div class="row">
     
         <?
@@ -56,18 +62,19 @@
     </div> 
     
     
-    <div class="row">
-      <div class="twelve columns">
-        <? if($questionData["userVoted"]["alreadyVoted"] === true){ ?>
-          <p class="alreadyVoted">Sie haben mit <span><?= $questionData["userVoted"]["answer"]["title"]; ?></span> abgestimmt</p>
-        <? } ?>
+    
+    <? if($showVoting){ ?>
+      <div id="votedText" class="row">
+        <div class="twelve columns">
+          <? if($questionData["userVoted"]["alreadyVoted"] === true){ ?>
+            <p class="alreadyVoted">Sie haben mit <span><?= $questionData["userVoted"]["answer"]["title"]; ?></span> abgestimmt</p>
+          <? } ?>
+        </div>
       </div>
-    </div>
+    <? } ?>
     
     
   </div>
-
-  You are <?= $userIP; ?>
   
 
  

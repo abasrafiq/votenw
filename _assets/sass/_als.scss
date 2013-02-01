@@ -43,31 +43,36 @@
 
 .randomQuestionWrapper {
 
+  .als-viewport{
 
-  .als-item {
-    width: 100%;
-    float: none;
-    margin: 0;
-    padding: 4px 0px;
-    text-align: center;
-    display: block;
-    background: blue;
-    color: white;
-    margin-bottom: 1px;
-    
-    a{
+    @include single-box-shadow(rgba(0,0,0,0.2), 0, 5px, 10px, 0);
+
+    .als-item {
+      width: 100%;
+      float: none;
+      margin: 0;
+      padding: 8px 0px;
+      background: #129324;
+      text-align: center;
       display: block;
-    }
+      color: white;
+      margin-bottom: 1px;
+      
+      a{
+        display: block;
+        color: white;
+        font-weight: 700;
+      }
 
-    &.alreadyVoted{
-        background: red;
-        
-        a{
-          color: white;
-        }
-    }
+      &.alreadyVoted{
+          background: #CA3321;
+          
+          a{
+            color: white;
+          }
+      }
 
-    
+    }
 
   }
 

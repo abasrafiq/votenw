@@ -6077,47 +6077,55 @@ table.hide-for-medium {
 /*************************************
  * specific for vertical
  ************************************/
-/* line 47, ../sass/_als.scss */
-.randomQuestionWrapper .als-item {
+/* line 46, ../sass/_als.scss */
+.randomQuestionWrapper .als-viewport {
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+/* line 50, ../sass/_als.scss */
+.randomQuestionWrapper .als-viewport .als-item {
   width: 100%;
   float: none;
   margin: 0;
-  padding: 4px 0px;
+  padding: 8px 0px;
+  background: #129324;
   text-align: center;
   display: block;
-  background: blue;
   color: white;
   margin-bottom: 1px;
 }
-/* line 58, ../sass/_als.scss */
-.randomQuestionWrapper .als-item a {
+/* line 61, ../sass/_als.scss */
+.randomQuestionWrapper .als-viewport .als-item a {
   display: block;
+  color: white;
+  font-weight: 700;
 }
-/* line 62, ../sass/_als.scss */
-.randomQuestionWrapper .als-item.alreadyVoted {
-  background: red;
+/* line 67, ../sass/_als.scss */
+.randomQuestionWrapper .als-viewport .als-item.alreadyVoted {
+  background: #CA3321;
 }
-/* line 65, ../sass/_als.scss */
-.randomQuestionWrapper .als-item.alreadyVoted a {
+/* line 70, ../sass/_als.scss */
+.randomQuestionWrapper .als-viewport .als-item.alreadyVoted a {
   color: white;
 }
-/* line 75, ../sass/_als.scss */
+/* line 80, ../sass/_als.scss */
 .randomQuestionWrapper .als-prev,
 .randomQuestionWrapper .als-next {
   position: static;
   display: block;
 }
-/* line 79, ../sass/_als.scss */
+/* line 84, ../sass/_als.scss */
 .randomQuestionWrapper .als-prev img,
 .randomQuestionWrapper .als-next img {
   display: block;
   margin: 0 auto;
 }
-/* line 86, ../sass/_als.scss */
+/* line 91, ../sass/_als.scss */
 .randomQuestionWrapper .als-prev {
   margin-bottom: 0.5em;
 }
-/* line 90, ../sass/_als.scss */
+/* line 95, ../sass/_als.scss */
 .randomQuestionWrapper .als-next {
   margin-top: 0.5em;
 }
@@ -6139,64 +6147,128 @@ table.hide-for-medium {
 body {
   font-family: "Helvetica Neue", Arial;
   font-weight: 300;
+  background: #3D3527;
 }
 
-/* line 20, ../sass/app.scss */
+/* line 21, ../sass/app.scss */
 h1,
 h2,
 h3 {
   font-family: "Open Sans Condensed", Arial;
 }
 
-/* line 24, ../sass/app.scss */
-#containerQuestion {
-  overflow-x: hidden;
-  min-height: 28.571em;
+/* line 25, ../sass/app.scss */
+h1 {
+  font-size: 2em;
 }
 
-/* QUESTION NAV */
-/* line 33, ../sass/app.scss */
-.questionNav a {
+/* line 29, ../sass/app.scss */
+a {
+  color: #db5600;
+}
+
+/* HEADER */
+/* line 36, ../sass/app.scss */
+header #headerInner {
+  margin: 0.714em 0;
+  background: #db5600;
+}
+/* line 42, ../sass/app.scss */
+header #headerInner h1 a {
+  color: white;
   display: block;
 }
-/* line 37, ../sass/app.scss */
-.questionNav .questionNavNextQuestion {
+
+/* QUESTION */
+/* line 54, ../sass/app.scss */
+#containerQuestion {
+  min-height: 30em;
+  overflow-x: hidden;
+  background: #F2E8D5;
+}
+/* line 59, ../sass/app.scss */
+#containerQuestion .questionTitle {
+  text-align: center;
+  margin: 0.5em;
+}
+/* line 64, ../sass/app.scss */
+#containerQuestion .questionTitle span {
+  font-size: 1.286em;
+  padding: 0 0.357em;
+  color: white;
+  background: #1387E8;
+  -webkit-border-radius: 10px 10px;
+  -moz-border-radius: 10px / 10px;
+  border-radius: 10px / 10px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+/* line 76, ../sass/app.scss */
+#containerQuestion .questionDescription {
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.5em;
+  color: #a5a5a5;
+}
+/* line 83, ../sass/app.scss */
+#containerQuestion #questionInner {
+  /* QUESTION NAV */
+}
+/* line 86, ../sass/app.scss */
+#containerQuestion #questionInner .questionNav {
+  margin-bottom: 1em;
+}
+/* line 90, ../sass/app.scss */
+#containerQuestion #questionInner .questionNav a {
+  display: block;
+  font-weight: 700;
+}
+/* line 95, ../sass/app.scss */
+#containerQuestion #questionInner .questionNav .questionNavNextQuestion {
   text-align: right;
 }
 
 /* VOTE FORM */
-/* line 45, ../sass/app.scss */
+/* line 106, ../sass/app.scss */
 .voteRow {
   text-align: center;
 }
-/* line 48, ../sass/app.scss */
+/* line 109, ../sass/app.scss */
 .voteRow .button.large {
-  font-size: 2em;
+  font-size: 1.857em;
   width: 7.143em;
   margin: 0 auto 0.714em auto;
 }
 
-/* line 55, ../sass/app.scss */
-label {
-  display: inline;
-  padding-left: 5px;
-}
-
 /* PIE CHART */
-/* line 62, ../sass/app.scss */
+/* line 119, ../sass/app.scss */
 .pieChartContainer {
   width: 33%!important;
   float: left;
 }
-/* line 66, ../sass/app.scss */
+/* line 123, ../sass/app.scss */
 .pieChartContainer .easyPieChart {
   max-width: 100%;
   margin: 0 auto;
 }
-/* line 72, ../sass/app.scss */
+/* line 127, ../sass/app.scss */
+.pieChartContainer .easyPieChart span {
+  font-family: "Open Sans Condensed";
+  font-size: 1.5em;
+  font-weight: 700;
+}
+/* line 135, ../sass/app.scss */
 .pieChartContainer .pieChartLabel {
   text-align: center;
   font-weight: 400;
   font-size: 1.2em;
   margin-bottom: 0.3em;
+}
+
+/* RANDOM QUESTION SIDEBAR */
+/* line 146, ../sass/app.scss */
+#containerRandomQuestions {
+  min-height: 30em;
+  background: #E0C89B;
 }

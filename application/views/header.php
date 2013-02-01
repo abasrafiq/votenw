@@ -41,7 +41,7 @@
 		<div id="wrapper">
 
 			<header class="row">
-				<div class="twelve columns">
+				<div id="headerInner" class="twelve columns">
 					<h1>
 						<a href="<?= base_url(); ?>">
 							Vote For Nerdwords
